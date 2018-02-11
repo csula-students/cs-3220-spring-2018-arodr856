@@ -1,0 +1,15 @@
+Theme:
+# ReesesPieces Clicker
+
+Resource:
+*ReecesPieces
+
+Generators:
+ReecesPieces Factory
+ReecesPieces Rain
+ReecesPieces Tree
+
+Story:
+* Received a truckload of ReecesPieces from the factory!
+* It's raining ReecesPieces!
+* A ReecesPieces Tree!
