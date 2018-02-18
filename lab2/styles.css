@@ -1,0 +1,104 @@
+body {
+    background-color: black;
+}
+
+div {
+    width: 1100px;
+    margin: auto;
+}
+.main-vertical-container {
+    display: flex;
+    height: 900px;
+    flex-direction: column;
+}
+
+.main-vertical-container>div {
+    margin: 10px 0;
+    /*UNCOMMENT TO SHOW BORDERS*/
+    /*border: solid white 3px;*/
+}
+
+.game-title-row {
+    display: flex;
+    flex: .50;
+    /*border: solid red 3px;*/
+}
+
+.game-title-row header,
+h1 {
+    color: white;
+    margin: auto;
+}
+
+.story-line-row {
+    flex: 1;
+    /* border: solid black 3px;*/
+    align-items: center;
+    display: flex;
+}
+
+.resource-name-row {
+    flex: .25;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*border: solid red 3px;*/
+}
+
+.resource-name-row label {
+    color: white;
+}
+
+.generator-row {
+    display: flex;
+    flex: 2;
+    /*  border: solid black 3px;*/
+}
+
+.story-line-box {
+    border: solid black 2px;
+    background-color: black;
+    /*margin: auto;*/
+    overflow: scroll;
+    height: 200px;
+    width: 1100px;
+}
+
+.story-line-box p {
+    color: white;
+}
+
+.generator-row>div {
+    display: flex;
+    flex-direction: column;
+    border: solid white 2px;
+    box-sizing: border-box;
+    flex-basis: 30%;
+    height: 400px;
+}
+
+.generator-row>div label {
+    flex: 1;
+    color: white;
+    margin: 10px;
+}
+
+
+.first-generator {
+    margin: auto 0;
+}
+
+.resource-button {
+    
+    margin: auto;
+    width: 100px;
+    color: red;
+}
+
+
+.third-generator {
+    display:flex;
+    margin: auto 0;
+
+}
+
