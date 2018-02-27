@@ -7,7 +7,7 @@
     </head>
 
     <body>
-        
+
         <div class="main-vertical-container width-constraint">
             <div class="game-title-row">
                 <header>
@@ -57,8 +57,8 @@
 
 
             <div class="generator-row">
-                <game-generator class="first-generator">
-                     <div class="count-container">
+                <game-generator data-id="0" class="first-generator">
+                    <div class="count-container">
                         <label class="generator-name">
                             {Generator Name}
                         </label>
@@ -73,12 +73,12 @@
                     </en>
                 </game-generator>
 
-                <game-generator class="second-generator">
+                <game-generator data-id="1" class="second-generator">
                     <div class="count-container">
                         <label class="generator-name">
                             {Generator Name}
                         </label>
-                        <label>0</label>
+                        <label class="count-label">0</label>
                     </div>
                     <label class="generator-description">
                         description
@@ -89,12 +89,12 @@
                     </en>
                 </game-generator>
 
-                <game-generator class="third-generator">
-                     <div class="count-container">
+                <game-generator data-id="2" class="third-generator">
+                    <div class="count-container">
                         <label class="generator-name">
                             {Generator Name}
                         </label>
-                        <label>0</label>
+                        <label class="count-label">0</label>
                     </div>
                     <label class="generator-description">
                         description
@@ -104,10 +104,12 @@
                         <button class="resource-button">10 Resources</button>
                     </en>
                 </game-generator>
+
             </div>
         </div>
         <!-- end of main-vertical-container-->
         <script type="text/javascript" src="dest/app.bundle.js"></script>
+        <script type="text/javascript" src="app.js"></script>
     </body>
 
 </html>

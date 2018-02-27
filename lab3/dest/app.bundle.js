@@ -731,17 +731,44 @@ function deepCopy(obj) {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+    value: true
 });
 exports.default = reducer;
 function reducer(state, action) {
-	switch (action.type) {
-		case 'EXAMPLE_MUTATION':
-			state.example = action.payload;
-			return state;
-		default:
-			return state;
-	}
+    switch (action.type) {
+        case 'EXAMPLE_MUTATION':
+            state.example = action.payload;
+            return state;
+        case 'BUY_GENERATOR':
+
+            if (action.generator_id == '0') {
+                if (state.gen_0_quantity == null) {
+                    state.gen_0_quantity = 1;
+                } else {
+                    state.gen_0_quantity = state.gen_0_quantity + action.payload;
+                }
+            }
+
+            if (action.generator_id == '1') {
+                if (state.gen_1_quantity == null) {
+                    state.gen_1_quantity = 1;
+                } else {
+                    state.gen_1_quantity = state.gen_1_quantity + action.payload;
+                }
+            }
+
+            if (action.generator_id == '2') {
+                if (state.gen_2_quantity == null) {
+                    state.gen_2_quantity = 1;
+                } else {
+                    state.gen_2_quantity = state.gen_2_quantity + action.payload;
+                }
+            }
+
+            return state;
+        default:
+            return state;
+    }
 }
 
 /***/ }),
@@ -861,22 +888,37 @@ exports.default = function (store) {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+    value: true
 });
 
 exports.default = function (store) {
-	return class GeneratorComponent extends window.HTMLElement {
-		constructor() {
-			super();
-			this.store = store;
+    return class GeneratorComponent extends window.HTMLElement {
+        constructor() {
+            super();
+            this.store = store;
+            // TODO: render generator initial view
 
-			// TODO: render generator initial view
+            // TODO: subscribe to store on change event
+            this.onStateChange = this.handleStateChange.bind(this);
+            this.store.subscribe(this.onStateChange);
+            // TODO: add click event
 
-			// TODO: subscribe to store on change event
+            this.querySelector(".resource-button").addEventListener('click', () => {
+                this.store.dispatch({ type: 'BUY_GENERATOR', payload: 1, generator_id: this.dataset.id });
+            });
+        }
 
-			// TODO: add click event
-		}
-	};
+        handleStateChange(newState) {
+            if (this.dataset.id == '0') {
+                this.querySelector('.count-label').textContent = newState.gen_0_quantity;
+            } else if (this.dataset.id == '1') {
+                this.querySelector('.count-label').textContent = newState.gen_1_quantity;
+            } else if (this.dataset.id == '2') {
+                this.querySelector('.count-label').textContent = newState.gen_2_quantity;
+            }
+        }
+
+    };
 };
 
 /***/ }),
