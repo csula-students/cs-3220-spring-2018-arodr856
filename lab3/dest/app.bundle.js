@@ -82,23 +82,23 @@ var _reducer = __webpack_require__(6);
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
-var _button = __webpack_require__(7);
+var _button = __webpack_require__(9);
 
 var _button2 = _interopRequireDefault(_button);
 
-var _counter = __webpack_require__(8);
+var _counter = __webpack_require__(10);
 
 var _counter2 = _interopRequireDefault(_counter);
 
-var _example = __webpack_require__(9);
+var _example = __webpack_require__(11);
 
 var _example2 = _interopRequireDefault(_example);
 
-var _generator = __webpack_require__(10);
+var _generator = __webpack_require__(12);
 
 var _generator2 = _interopRequireDefault(_generator);
 
-var _storyBook = __webpack_require__(11);
+var _storyBook = __webpack_require__(13);
 
 var _storyBook2 = _interopRequireDefault(_storyBook);
 
@@ -734,37 +734,59 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = reducer;
+
+var _generator = __webpack_require__(7);
+
+var _generator2 = _interopRequireDefault(_generator);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function reducer(state, action) {
     switch (action.type) {
         case 'EXAMPLE_MUTATION':
             state.example = action.payload;
             return state;
         case 'BUY_GENERATOR':
-
-            if (action.generator_id == '0') {
-                if (state.gen_0_quantity == null) {
-                    state.gen_0_quantity = 1;
-                } else {
-                    state.gen_0_quantity = state.gen_0_quantity + action.payload;
+            if (state.counter == null) {
+                state.counter = 10;
+                let genInfo = {
+                    type: 'autonomous',
+                    name: action.payload.name,
+                    description: 'desc',
+                    rate: 10,
+                    quantity: 1,
+                    baseCost: 10,
+                    unlockValue: 10
+                };
+                let g = new _generator2.default(genInfo);
+                state.generators = [];
+                state.generators.push(g);
+            } else {
+                for (let i = 0; i < state.generators.length; i++) {
+                    const generator = state.generators[i];
+                    if (generator.name === action.payload.name) {
+                        let temp = new _generator2.default(generator);
+                        let cost = temp.getCost();
+                        state.counter -= cost;
+                        generator.quantity++;
+                        // console.log(state.generators);
+                        return state;
+                    }
                 }
-            }
+                let gen1 = {
+                    type: 'autonomous',
+                    name: action.payload.name,
+                    description: 'desc',
+                    rate: 10,
+                    quantity: 1,
+                    baseCost: 10,
+                    unlockValue: 10
+                };
+                let g = new _generator2.default(gen1);
 
-            if (action.generator_id == '1') {
-                if (state.gen_1_quantity == null) {
-                    state.gen_1_quantity = 1;
-                } else {
-                    state.gen_1_quantity = state.gen_1_quantity + action.payload;
-                }
+                state.generators.push(g);
+                //  console.log(state.generators);
             }
-
-            if (action.generator_id == '2') {
-                if (state.gen_2_quantity == null) {
-                    state.gen_2_quantity = 1;
-                } else {
-                    state.gen_2_quantity = state.gen_2_quantity + action.payload;
-                }
-            }
-
             return state;
         default:
             return state;
@@ -773,6 +795,85 @@ function reducer(state, action) {
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _constants = __webpack_require__(8);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class Generator {
+	/**
+  * Create a new generator based on the meta object passing in
+  * @constructor
+  * @param {object} meta - meta object for constructing generator
+  */
+	constructor(meta) {
+		this.type = meta.type;
+		this.name = meta.name;
+		this.description = meta.description;
+		this.rate = meta.rate;
+		this.quantity = meta.quantity;
+		this.baseCost = meta.baseCost;
+		this.unlockValue = meta.unlockValue;
+	}
+
+	/**
+  * getCost computes cost exponentially based on quantity (as formula below)
+  * xt = x0(1 + r)^t
+  * which 
+  * xt is the value of x with t quantity
+  * x0 is base value
+  * r is growth ratio (see constants.growthRatio)
+  * t is the quantity
+  * @return {number} the cost of buying another generator
+  */
+	getCost() {
+		if (this.quantity == 0) {
+			return this.baseCost;
+		}
+		return parseFloat((this.baseCost * Math.pow(1 + _constants2.default.growthRatio, this.quantity)).toFixed(2));
+	}
+
+	/**
+  * generate computes how much this type of generator generates -
+  * rate * quantity
+  * @return {number} how much this generator generates
+  */
+	generate() {
+		return this.rate * this.quantity;
+	}
+}
+exports.default = Generator;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	growthRatio: 0.05,
+	actions: {
+		EXAMPLE: 'EXAMPLE_MUTATION',
+		BUY_GENERATOR: 'BUY_GENERATOR'
+	}
+};
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -797,7 +898,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -833,7 +934,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -881,7 +982,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -897,32 +998,48 @@ exports.default = function (store) {
             super();
             this.store = store;
             // TODO: render generator initial view
-
             // TODO: subscribe to store on change event
             this.onStateChange = this.handleStateChange.bind(this);
             this.store.subscribe(this.onStateChange);
             // TODO: add click event
 
             this.querySelector(".resource-button").addEventListener('click', () => {
-                this.store.dispatch({ type: 'BUY_GENERATOR', payload: 1, generator_id: this.dataset.id });
+                this.store.dispatch({
+                    type: 'BUY_GENERATOR',
+                    payload: {
+                        quantity: 1,
+                        name: this.dataset.name
+                    }
+                });
             });
         }
 
         handleStateChange(newState) {
-            if (this.dataset.id == '0') {
-                this.querySelector('.count-label').textContent = newState.gen_0_quantity;
-            } else if (this.dataset.id == '1') {
-                this.querySelector('.count-label').textContent = newState.gen_1_quantity;
-            } else if (this.dataset.id == '2') {
-                this.querySelector('.count-label').textContent = newState.gen_2_quantity;
-            }
+            var gens = newState.generators;
+            gens.forEach(element => {
+                if (element.name === this.dataset.name) {
+                    this.querySelector('.count-label').textContent = element.quantity;
+                }
+            });
+
+            //            if(this.dataset.id == '0'){
+            //                this.querySelector('.count-label').textContent = newState.gen_0_quantity;
+            //            }
+            //            else if(this.dataset.id == '1'){
+            //                this.querySelector('.count-label').textContent = newState.gen_1_quantity;
+            //                
+            //            }
+            //            else if(this.dataset.id == '2'){
+            //                this.querySelector('.count-label').textContent = newState.gen_2_quantity;
+            //                
+            //            }
         }
 
     };
 };
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
