@@ -26,6 +26,7 @@ export default function (store) {
             gens.forEach(element => {
                 if(element.name === this.dataset.name){
                     this.querySelector('.count-label').textContent = element.quantity;
+                    this.querySelector('.resource-button').textContent = element.unlockValue;
                 }
             });
         }

@@ -747,47 +747,52 @@ function reducer(state, action) {
             state.example = action.payload;
             return state;
         case 'BUY_GENERATOR':
-            if (state.counter == null) {
-                state.counter = 10;
-                let genInfo = {
-                    type: 'autonomous',
-                    name: action.payload.name,
-                    description: 'desc',
-                    rate: 10,
-                    quantity: 1,
-                    baseCost: 10,
-                    unlockValue: 10
-                };
-                let g = new _generator2.default(genInfo);
-                state.generators = [];
-                state.generators.push(g);
-            } else {
-                for (let i = 0; i < state.generators.length; i++) {
-                    const generator = state.generators[i];
-                    if (generator.name === action.payload.name) {
-                        let temp = new _generator2.default(generator);
-                        let cost = temp.getCost();
-                        state.counter -= cost;
-                        generator.quantity++;
-                        // console.log(state.generators);
-                        return state;
-                    }
+            for (let i = 0; i < state.generators.length; i++) {
+                let generator = state.generators[i];
+                if (generator.name === action.payload.name) {
+                    let gen = new _generator2.default(generator);
+                    let cost = gen.getCost();
+                    // console.log(cost);
+                    state.counter -= cost;
+                    generator.quantity++;
+                    let newCost = gen.getCost();
+                    generator.unlockValue = newCost;
+                    // console.log("in reducer" + gen);
+                    // console.log(state);
+                    return state;
                 }
-                let gen1 = {
-                    type: 'autonomous',
-                    name: action.payload.name,
-                    description: 'desc',
-                    rate: 10,
-                    quantity: 1,
-                    baseCost: 10,
-                    unlockValue: 10
-                };
-                let g = new _generator2.default(gen1);
-
-                state.generators.push(g);
-                //  console.log(state.generators);
             }
+
+            let generatorName = action.payload.name;
+            const generatorData = {
+                type: 'autonomous',
+                name: generatorName,
+                description: 'desc',
+                quantity: 0,
+                baseCost: 0,
+                unlockValue: 0
+            };
+
+            if (generatorName === "tree") {
+                generatorData.rate = 10;
+                generatorData.baseCost = 10;
+                generatorData.unlockValue = 10;
+            } else if (generatorName === "factory") {
+                generatorData.rate = 25;
+                generatorData.baseCost = 35;
+                generatorData.unlockValue = 35;
+            } else if (generatorName === "rain") {
+                generatorData.rate = 45;
+                generatorData.baseCost = 70;
+                generatorData.unlockValue = 70;
+            }
+            generatorData.quantity++;
+            state.counter -= generatorData.baseCost;
+            let g = new _generator2.default(generatorData);
+            g.unlockValue = g.getCost();
+            state.generators.push(g);
             return state;
+
         default:
             return state;
     }
@@ -1019,22 +1024,10 @@ exports.default = function (store) {
             gens.forEach(element => {
                 if (element.name === this.dataset.name) {
                     this.querySelector('.count-label').textContent = element.quantity;
+                    this.querySelector('.resource-button').textContent = element.unlockValue;
                 }
             });
-
-            //            if(this.dataset.id == '0'){
-            //                this.querySelector('.count-label').textContent = newState.gen_0_quantity;
-            //            }
-            //            else if(this.dataset.id == '1'){
-            //                this.querySelector('.count-label').textContent = newState.gen_1_quantity;
-            //                
-            //            }
-            //            else if(this.dataset.id == '2'){
-            //                this.querySelector('.count-label').textContent = newState.gen_2_quantity;
-            //                
-            //            }
         }
-
     };
 };
 
