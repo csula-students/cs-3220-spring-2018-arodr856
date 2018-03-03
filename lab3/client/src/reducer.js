@@ -8,13 +8,11 @@
             case 'BUY_GENERATOR':
                 for (let i = 0; i < state.generators.length; i++) {
                     let generator = state.generators[i];
-                    if (generator.name === action.payload.name) {
+                    if (generator.name === action.payload.name) { 
                         let gen = new Generator(generator);
-                        let cost = gen.getCost();
-                        state.counter -= cost;
+                        state.counter -= gen.getCost();
                         generator.quantity++;
-                        let newCost = gen.getCost();
-                        generator.unlockValue = newCost;
+                        generator.unlockValue = gen.getCost();
                         return state;
                 }
             }

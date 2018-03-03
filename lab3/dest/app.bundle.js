@@ -751,14 +751,9 @@ function reducer(state, action) {
                 let generator = state.generators[i];
                 if (generator.name === action.payload.name) {
                     let gen = new _generator2.default(generator);
-                    let cost = gen.getCost();
-                    // console.log(cost);
-                    state.counter -= cost;
+                    state.counter -= gen.getCost();
                     generator.quantity++;
-                    let newCost = gen.getCost();
-                    generator.unlockValue = newCost;
-                    // console.log("in reducer" + gen);
-                    // console.log(state);
+                    generator.unlockValue = gen.getCost();
                     return state;
                 }
             }
