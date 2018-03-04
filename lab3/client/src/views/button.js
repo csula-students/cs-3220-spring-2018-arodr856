@@ -9,5 +9,23 @@ export default function (store) {
 			// TODO: add click event to increment counter
 			// hint: use "store.dispatch" method (see example component)
 		}
+
+		handleStateChange (newState) {
+			//console.log('CounterComponent#stateChange', this, newState);
+			// TODO: update inner HTML based on the new state
+		}
+
+		connectedCallback () {
+			this.addEventListener('click', () => {
+				this.store.dispatch({type: 'BUTTON_CLICK'});
+			});
+		//	this.store.subscribe(this.onStateChange);
+		}
+
+		disconnectedCallback () {
+			this.store.unsubscribe(this.onStateChange);
+		}
+
+
 	};
 }

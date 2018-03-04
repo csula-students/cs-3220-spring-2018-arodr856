@@ -747,8 +747,7 @@ function reducer(state, action) {
             state.example = action.payload;
             return state;
         case 'BUY_GENERATOR':
-            for (let i = 0; i < state.generators.length; i++) {
-                let generator = state.generators[i];
+            state.generators.forEach(generator => {
                 if (generator.name === action.payload.name) {
                     let gen = new _generator2.default(generator);
                     state.counter -= gen.getCost();
@@ -756,9 +755,11 @@ function reducer(state, action) {
                     generator.unlockValue = gen.getCost();
                     return state;
                 }
-            }
+            });
             return state;
-
+        case 'BUTTON_CLICK':
+            state.counter++;
+            return state;
         default:
             return state;
     }
@@ -865,6 +866,23 @@ exports.default = function (store) {
 			// TODO: add click event to increment counter
 			// hint: use "store.dispatch" method (see example component)
 		}
+
+		handleStateChange(newState) {
+			//console.log('CounterComponent#stateChange', this, newState);
+			// TODO: update inner HTML based on the new state
+		}
+
+		connectedCallback() {
+			this.addEventListener('click', () => {
+				this.store.dispatch({ type: 'BUTTON_CLICK' });
+			});
+			//	this.store.subscribe(this.onStateChange);
+		}
+
+		disconnectedCallback() {
+			this.store.unsubscribe(this.onStateChange);
+		}
+
 	};
 };
 
@@ -884,17 +902,17 @@ exports.default = function (store) {
 		constructor() {
 			super();
 			this.store = store;
-			// TODO: render counter inner HTML based on the store state
-
 			this.onStateChange = this.handleStateChange.bind(this);
 		}
 
 		handleStateChange(newState) {
 			console.log('CounterComponent#stateChange', this, newState);
-			// TODO: update inner HTML based on the new state
+			this.querySelector('#count').textContent = newState.counter;
 		}
 
 		connectedCallback() {
+			this.querySelector('#count').textContent = 0;
+
 			this.store.subscribe(this.onStateChange);
 		}
 
@@ -968,11 +986,11 @@ exports.default = function (store) {
         constructor() {
             super();
             this.store = store;
-            // TODO: render generator initial view
-            // TODO: subscribe to store on change event
+
             this.onStateChange = this.handleStateChange.bind(this);
+
             this.store.subscribe(this.onStateChange);
-            // TODO: add click event
+
             this.querySelector(".resource-button").addEventListener('click', () => {
                 this.store.dispatch({
                     type: 'BUY_GENERATOR',
@@ -986,6 +1004,7 @@ exports.default = function (store) {
 
         handleStateChange(newState) {
             var gens = newState.generators;
+
             gens.forEach(element => {
                 if (element.name === this.dataset.name) {
                     this.querySelector('.count-label').textContent = element.quantity;
@@ -993,6 +1012,7 @@ exports.default = function (store) {
                 }
             });
         }
+
     };
 };
 
