@@ -35,4 +35,5 @@ pubSub.subscribe(updateCount);
 let dom = document.querySelector("#action_button");
 dom.addEventListener('click', function () {
     pubSub.publish(++window.incrementalGame.state.counter);
+    window.store.__state.counter++;
 });

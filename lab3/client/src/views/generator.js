@@ -8,7 +8,6 @@ export default function (store) {
             this.onStateChange = this.handleStateChange.bind(this);
             this.store.subscribe(this.onStateChange);
             // TODO: add click event
-
             this.querySelector(".resource-button").addEventListener('click', () => {
                 this.store.dispatch({
                     type: 'BUY_GENERATOR',
@@ -24,11 +23,11 @@ export default function (store) {
         handleStateChange(newState) {
             var gens = newState.generators;
             gens.forEach(element => {
-                if(element.name === this.dataset.name){
-                    this.querySelector('.count-label').textContent = element.quantity;
-                    this.querySelector('.resource-button').textContent = element.unlockValue;
-                }
-            });
+               if(element.name === this.dataset.name){
+                this.querySelector('.count-label').textContent = element.quantity;
+                this.querySelector('.resource-button').textContent = element.unlockValue;
+            }
+        });
         }
     };
 }

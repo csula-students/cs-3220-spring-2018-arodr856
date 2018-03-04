@@ -171,7 +171,7 @@ function main() {
 	const initialState = {
 		example: 'Hello custom element',
 		counter: 0,
-		generators: [],
+		generators: [{ type: 'autonomous', name: "tree", description: 'desc', rate: 10, quantity: 0, baseCost: 10, unlockValue: 10 }, { type: 'autonomous', name: "factory", description: 'desc', rate: 25, quantity: 0, baseCost: 35, unlockValue: 35 }, { type: 'autonomous', name: "rain", description: 'desc', rate: 45, quantity: 0, baseCost: 70, unlockValue: 70 }],
 		story: []
 	};
 
@@ -757,35 +757,6 @@ function reducer(state, action) {
                     return state;
                 }
             }
-
-            let generatorName = action.payload.name;
-            const generatorData = {
-                type: 'autonomous',
-                name: generatorName,
-                description: 'desc',
-                quantity: 0,
-                baseCost: 0,
-                unlockValue: 0
-            };
-
-            if (generatorName === "tree") {
-                generatorData.rate = 10;
-                generatorData.baseCost = 10;
-                generatorData.unlockValue = 10;
-            } else if (generatorName === "factory") {
-                generatorData.rate = 25;
-                generatorData.baseCost = 35;
-                generatorData.unlockValue = 35;
-            } else if (generatorName === "rain") {
-                generatorData.rate = 45;
-                generatorData.baseCost = 70;
-                generatorData.unlockValue = 70;
-            }
-            generatorData.quantity++;
-            state.counter -= generatorData.baseCost;
-            let g = new _generator2.default(generatorData);
-            g.unlockValue = g.getCost();
-            state.generators.push(g);
             return state;
 
         default:
@@ -1002,7 +973,6 @@ exports.default = function (store) {
             this.onStateChange = this.handleStateChange.bind(this);
             this.store.subscribe(this.onStateChange);
             // TODO: add click event
-
             this.querySelector(".resource-button").addEventListener('click', () => {
                 this.store.dispatch({
                     type: 'BUY_GENERATOR',
