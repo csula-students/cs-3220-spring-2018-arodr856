@@ -7,13 +7,12 @@ export default function (store) {
 		}
 
 		handleStateChange (newState) {
-			console.log('CounterComponent#stateChange', this, newState);
+			//console.log('CounterComponent#stateChange', this, newState);
 			this.querySelector('#count').textContent = newState.counter;
 		}
 
 		connectedCallback () {
 			this.querySelector('#count').textContent = 0;
-
 			this.store.subscribe(this.onStateChange);
 		}
 

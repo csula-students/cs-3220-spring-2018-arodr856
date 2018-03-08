@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,15 +70,76 @@
 "use strict";
 
 
-__webpack_require__(1);
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
 
-var _game = __webpack_require__(4);
+var _constants = __webpack_require__(8);
 
-var _store = __webpack_require__(5);
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class Generator {
+	/**
+  * Create a new generator based on the meta object passing in
+  * @constructor
+  * @param {object} meta - meta object for constructing generator
+  */
+	constructor(meta) {
+		this.type = meta.type;
+		this.name = meta.name;
+		this.description = meta.description;
+		this.rate = meta.rate;
+		this.quantity = meta.quantity;
+		this.baseCost = meta.baseCost;
+		this.unlockValue = meta.unlockValue;
+	}
+
+	/**
+  * getCost computes cost exponentially based on quantity (as formula below)
+  * xt = x0(1 + r)^t
+  * which 
+  * xt is the value of x with t quantity
+  * x0 is base value
+  * r is growth ratio (see constants.growthRatio)
+  * t is the quantity
+  * @return {number} the cost of buying another generator
+  */
+	getCost() {
+		if (this.quantity == 0) {
+			return this.baseCost;
+		}
+		return parseFloat((this.baseCost * Math.pow(1 + _constants2.default.growthRatio, this.quantity)).toFixed(2));
+	}
+
+	/**
+  * generate computes how much this type of generator generates -
+  * rate * quantity
+  * @return {number} how much this generator generates
+  */
+	generate() {
+		return this.rate * this.quantity;
+	}
+}
+exports.default = Generator;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(2);
+
+var _game = __webpack_require__(5);
+
+var _store = __webpack_require__(6);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _reducer = __webpack_require__(6);
+var _reducer = __webpack_require__(7);
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
@@ -101,6 +162,10 @@ var _generator2 = _interopRequireDefault(_generator);
 var _storyBook = __webpack_require__(13);
 
 var _storyBook2 = _interopRequireDefault(_storyBook);
+
+var _generator3 = __webpack_require__(0);
+
+var _generator4 = _interopRequireDefault(_generator3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -162,12 +227,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
           |    Components    |<------------------------------+
           |                  |
           +------------------+
- */
+          */
 main();
 
 // main function wraps everything at top level
 function main() {
-	// TODO: fill the blank based on the theme you have choosen
 	const initialState = {
 		example: 'Hello custom element',
 		counter: 0,
@@ -198,7 +262,7 @@ function main() {
 }
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function(){/*
@@ -399,10 +463,10 @@ Eg.whenReady(function(){requestAnimationFrame(function(){window.WebComponents.re
 
 //# sourceMappingURL=webcomponents-lite.js.map
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(4)))
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports) {
 
 var g;
@@ -429,7 +493,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -619,7 +683,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -653,7 +717,7 @@ function increment(state, modifier = 1) {
 }
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -724,7 +788,7 @@ function deepCopy(obj) {
 }
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -735,7 +799,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = reducer;
 
-var _generator = __webpack_require__(7);
+var _generator = __webpack_require__(0);
 
 var _generator2 = _interopRequireDefault(_generator);
 
@@ -750,9 +814,12 @@ function reducer(state, action) {
             state.generators.forEach(generator => {
                 if (generator.name === action.payload.name) {
                     let gen = new _generator2.default(generator);
-                    state.counter -= gen.getCost();
-                    generator.quantity++;
-                    generator.unlockValue = gen.getCost();
+                    let generatorCost = gen.getCost();
+                    if (generatorCost <= state.counter) {
+                        state.counter -= generatorCost;
+                        generator.quantity++;
+                        generator.unlockValue = gen.getCost();
+                    }
                     return state;
                 }
             });
@@ -764,67 +831,6 @@ function reducer(state, action) {
             return state;
     }
 }
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _constants = __webpack_require__(8);
-
-var _constants2 = _interopRequireDefault(_constants);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-class Generator {
-	/**
-  * Create a new generator based on the meta object passing in
-  * @constructor
-  * @param {object} meta - meta object for constructing generator
-  */
-	constructor(meta) {
-		this.type = meta.type;
-		this.name = meta.name;
-		this.description = meta.description;
-		this.rate = meta.rate;
-		this.quantity = meta.quantity;
-		this.baseCost = meta.baseCost;
-		this.unlockValue = meta.unlockValue;
-	}
-
-	/**
-  * getCost computes cost exponentially based on quantity (as formula below)
-  * xt = x0(1 + r)^t
-  * which 
-  * xt is the value of x with t quantity
-  * x0 is base value
-  * r is growth ratio (see constants.growthRatio)
-  * t is the quantity
-  * @return {number} the cost of buying another generator
-  */
-	getCost() {
-		if (this.quantity == 0) {
-			return this.baseCost;
-		}
-		return parseFloat((this.baseCost * Math.pow(1 + _constants2.default.growthRatio, this.quantity)).toFixed(2));
-	}
-
-	/**
-  * generate computes how much this type of generator generates -
-  * rate * quantity
-  * @return {number} how much this generator generates
-  */
-	generate() {
-		return this.rate * this.quantity;
-	}
-}
-exports.default = Generator;
 
 /***/ }),
 /* 8 */
@@ -860,23 +866,12 @@ exports.default = function (store) {
 		constructor() {
 			super();
 			this.store = store;
-
-			this.onStateChange = this.handleStateChange.bind(this);
-
-			// TODO: add click event to increment counter
-			// hint: use "store.dispatch" method (see example component)
-		}
-
-		handleStateChange(newState) {
-			//console.log('CounterComponent#stateChange', this, newState);
-			// TODO: update inner HTML based on the new state
 		}
 
 		connectedCallback() {
 			this.addEventListener('click', () => {
 				this.store.dispatch({ type: 'BUTTON_CLICK' });
 			});
-			//	this.store.subscribe(this.onStateChange);
 		}
 
 		disconnectedCallback() {
@@ -906,13 +901,12 @@ exports.default = function (store) {
 		}
 
 		handleStateChange(newState) {
-			console.log('CounterComponent#stateChange', this, newState);
+			//console.log('CounterComponent#stateChange', this, newState);
 			this.querySelector('#count').textContent = newState.counter;
 		}
 
 		connectedCallback() {
 			this.querySelector('#count').textContent = 0;
-
 			this.store.subscribe(this.onStateChange);
 		}
 
