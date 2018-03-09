@@ -813,12 +813,12 @@ function reducer(state, action) {
         case 'BUY_GENERATOR':
             state.generators.forEach(generator => {
                 if (generator.name === action.payload.name) {
-                    let gen = new _generator2.default(generator);
-                    let generatorCost = gen.getCost();
+                    let genModel = new _generator2.default(generator);
+                    let generatorCost = genModel.getCost();
                     if (generatorCost <= state.counter) {
                         state.counter -= generatorCost;
                         generator.quantity++;
-                        generator.unlockValue = gen.getCost();
+                        generator.unlockValue = genModel.getCost();
                     }
                     return state;
                 }
@@ -980,6 +980,7 @@ exports.default = function (store) {
         constructor() {
             super();
             this.store = store;
+            this.innerHTML = this.render();
 
             this.onStateChange = this.handleStateChange.bind(this);
 
@@ -1005,6 +1006,22 @@ exports.default = function (store) {
                     this.querySelector('.resource-button').textContent = element.unlockValue;
                 }
             });
+        }
+
+        render() {
+            return `<div class="count-container">
+                        <label class="generator-name">
+                            ${this.dataset.name}
+                        </label>
+                        <label class="count-label">0</label>
+                    </div>
+                    <label class="generator-description">
+                        description
+                    </label>
+                    <en class="resource-button-container">  
+                        <label class="rate">45/60</label>
+                        <button class="resource-button">${this.store.state.generators[this.dataset.id].baseCost}</button>
+                    </en>`;
         }
 
     };

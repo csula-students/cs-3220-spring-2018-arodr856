@@ -8,12 +8,12 @@
             case 'BUY_GENERATOR':
             state.generators.forEach(generator => {
                 if(generator.name === action.payload.name){
-                 let gen = new Generator(generator);
-                 let generatorCost = gen.getCost(); 
+                 let genModel = new Generator(generator);
+                 let generatorCost = genModel.getCost(); 
                   if(generatorCost <= state.counter){ 
                     state.counter -= generatorCost; 
                     generator.quantity++;
-                    generator.unlockValue = gen.getCost();
+                    generator.unlockValue = genModel.getCost();
                     }
                     return state;
                 }
