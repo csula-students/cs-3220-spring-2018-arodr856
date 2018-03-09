@@ -10,8 +10,6 @@ import ExampleComponent from './views/example';
 import GeneratorComponent from './views/generator';
 import StoryBookComponent from './views/story-book';
 
-import Generator from "./models/generator";
-
 /**
  * Data flow diagram
  +----------------------------------------------------+
@@ -70,19 +68,17 @@ import Generator from "./models/generator";
           |    Components    |<------------------------------+
           |                  |
           +------------------+
-          */
-          main();
+ */
+main();
 
 // main function wraps everything at top level
 function main () {
+	// TODO: fill the blank based on the theme you have choosen
 	const initialState = {
 		example: 'Hello custom element',
 		counter: 0,
-		generators: [{type: 'autonomous',name: "tree",description: 'desc',rate: 10,quantity: 0, baseCost: 10,  unlockValue: 10},
-		{type: 'autonomous',name: "factory",description: 'desc',rate: 25,quantity: 0, baseCost: 35,  unlockValue: 35},
-		{type: 'autonomous',name: "rain",description: 'desc',rate: 45,quantity: 0, baseCost: 70,  unlockValue: 70}
-		],
-		story: []
+		generators: [],
+		stories: []
 	};
 
 	// initialize store

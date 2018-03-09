@@ -29,7 +29,7 @@ export default class Store {
 	 * @param {object} action - action should contain both `type` and `payload`
 	 */
 	dispatch (action) {
-		this.__state = this.reducer(this.state, action); 
+		this.__state = this.reducer(this.state, action);
 		this.listeners.forEach(l => l(this.state, action));
 	}
 
