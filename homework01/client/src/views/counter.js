@@ -9,7 +9,7 @@ export default function (store) {
 		}
 
 		handleStateChange (newState) {
-			console.log('CounterComponent#stateChange', this, newState);
+			//console.log('CounterComponent#stateChange', this, newState);
 			this.querySelector('#count').textContent = newState.counter;
 		}
 
