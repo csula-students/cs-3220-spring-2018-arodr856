@@ -81,7 +81,12 @@ function main () {
 		{type: 'autonomous',name: "factory",description: 'desc',rate: 25,quantity: 0, baseCost: 35,  unlockValue: 35},
 		{type: 'autonomous',name: "rain",description: 'desc',rate: 45,quantity: 0, baseCost: 70,  unlockValue: 70}
 		],
-		stories: []
+		stories: [{
+	name: 'Grandma shows up',
+	description: 'desc',
+	triggeredAt: 10,
+	state: 'hidden'
+}]
 	};
 
 	// initialize store

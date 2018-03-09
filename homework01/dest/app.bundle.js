@@ -141,23 +141,23 @@ var _reducer = __webpack_require__(8);
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
-var _button = __webpack_require__(9);
+var _button = __webpack_require__(10);
 
 var _button2 = _interopRequireDefault(_button);
 
-var _counter = __webpack_require__(10);
+var _counter = __webpack_require__(11);
 
 var _counter2 = _interopRequireDefault(_counter);
 
-var _example = __webpack_require__(11);
+var _example = __webpack_require__(12);
 
 var _example2 = _interopRequireDefault(_example);
 
-var _generator = __webpack_require__(12);
+var _generator = __webpack_require__(13);
 
 var _generator2 = _interopRequireDefault(_generator);
 
-var _storyBook = __webpack_require__(13);
+var _storyBook = __webpack_require__(14);
 
 var _storyBook2 = _interopRequireDefault(_storyBook);
 
@@ -231,7 +231,12 @@ function main() {
 		example: 'Hello custom element',
 		counter: 0,
 		generators: [{ type: 'autonomous', name: "tree", description: 'desc', rate: 10, quantity: 0, baseCost: 10, unlockValue: 10 }, { type: 'autonomous', name: "factory", description: 'desc', rate: 25, quantity: 0, baseCost: 35, unlockValue: 35 }, { type: 'autonomous', name: "rain", description: 'desc', rate: 45, quantity: 0, baseCost: 70, unlockValue: 70 }],
-		stories: []
+		stories: [{
+			name: 'Grandma shows up',
+			description: 'desc',
+			triggeredAt: 10,
+			state: 'hidden'
+		}]
 	};
 
 	// initialize store
@@ -834,6 +839,10 @@ var _generator = __webpack_require__(0);
 
 var _generator2 = _interopRequireDefault(_generator);
 
+var _story = __webpack_require__(9);
+
+var _story2 = _interopRequireDefault(_story);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function reducer(state, action) {
@@ -859,6 +868,17 @@ function reducer(state, action) {
     case 'INCREMENT':
       state.counter += action.payload;
       return state;
+
+    case 'CHECK_STORY':
+
+      state.stories.forEach(story => {
+        let storyModel = new _story2.default(story);
+        if (storyModel.isUnlockYet(state.counter)) {
+          story.state = 'visible';
+        }
+      });
+
+      return state;
     default:
       return state;
   }
@@ -866,6 +886,52 @@ function reducer(state, action) {
 
 /***/ }),
 /* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+class Story {
+	/**
+  * create a new story based on the meta passed in argument
+  * @constructor
+  * @param {object} meta - the meta data for story
+  */
+	constructor(meta) {
+		this.name = meta.name;
+		this.description = meta.description;
+		this.triggeredAt = meta.triggeredAt;
+		this.state = meta.state;
+	}
+
+	/**
+  * isUnlockYet checks if this story is ready to be unlocked yet
+  * @param {number} value - the resource value at the moment
+  * @return {boolean} if this story is unlockable
+  */
+	isUnlockYet(value) {
+		// TODO: implement based on doc
+		if (value >= this.triggeredAt) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+  * unlock simply unlock the story to visible state
+  */
+	unlock() {
+		// TODO: change the story state to "visible"
+		this.state = 'visible';
+	}
+}
+exports.default = Story;
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -902,7 +968,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -939,7 +1005,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -987,7 +1053,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1056,7 +1122,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
