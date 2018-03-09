@@ -27,8 +27,7 @@ export default class Generator {
 	 * @return {number} the cost of buying another generator
 	 */
 	getCost () {
-		// TODO: implement the function according to doc above
-		return 0;
+		return parseFloat((this.baseCost * Math.pow(1 + constants.growthRatio, this.quantity)).toFixed(2)); 
 	}
 
 	/**
@@ -37,7 +36,7 @@ export default class Generator {
 	 * @return {number} how much this generator generates
 	 */
 	generate () {
-		// TODO: implement based on doc above
-		return 0;
+		
+		return this.rate * this.quantity;
 	}
 }

@@ -5,15 +5,31 @@ export default function (store) {
 			this.store = store;
 			this.onStateChange = this.handleStateChange.bind(this);
 
-			// TODO: render generator initial view
-
-			// TODO: subscribe to store on change event
-
-			// TODO: add click event
+			
+			this.innerHTML = this.render();
+			
+			this.querySelector(".resource-button").addEventListener('click', () => {
+                this.store.dispatch({
+                    type: 'BUY_GENERATOR',
+                    payload: {
+                        quantity: 1,
+                        name: this.dataset.name
+                    }
+                });
+            });
 
 		}
 
 		handleStateChange (newState) {
+			 var gens = newState.generators;
+
+            gens.forEach(element => {
+               if(element.name === this.dataset.name){
+                this.querySelector('.count-label').textContent = element.quantity;
+                this.querySelector('.resource-button').textContent = element.unlockValue;
+            }
+        });
+
 		}
 
 		connectedCallback () {
@@ -23,5 +39,22 @@ export default function (store) {
 		disconnectedCallback () {
 			this.store.unsubscribe(this.onStateChange);
 		}
+
+		render(){
+            return `<div class="count-container">
+                        <label class="generator-name">
+                            ${this.dataset.name}
+                        </label>
+                        <label class="count-label">0</label>
+                    </div>
+                    <label class="generator-description">
+                        description
+                    </label>
+                    <en class="resource-button-container">  
+                        <label class="rate">45/60</label>
+                        <button class="resource-button">${this.store.state.generators[this.dataset.id].baseCost}</button>
+                    </en>`
+        }
+
 	};
 }
