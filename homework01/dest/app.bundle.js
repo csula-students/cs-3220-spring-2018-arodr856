@@ -221,7 +221,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
           |    Components    |<------------------------------+
           |                  |
           +------------------+
- */
+          */
 main();
 
 // main function wraps everything at top level
@@ -230,10 +230,12 @@ function main() {
 	const initialState = {
 		example: 'Hello custom element',
 		counter: 0,
+
 		generators: [{ type: 'autonomous', name: "tree", description: 'desc', rate: 10, quantity: 0, baseCost: 10, unlockValue: 10 }, { type: 'autonomous', name: "factory", description: 'desc', rate: 25, quantity: 0, baseCost: 35, unlockValue: 35 }, { type: 'autonomous', name: "rain", description: 'desc', rate: 45, quantity: 0, baseCost: 70, unlockValue: 70 }],
+
 		stories: [{
 			name: 'Grandma shows up',
-			description: 'desc',
+			description: 'A grandma showed up to make some cookies!!!!',
 			triggeredAt: 10,
 			state: 'hidden'
 		}]
@@ -728,6 +730,8 @@ function loop(store) {
 	//       the `triggeredAt` points
 	// hint: use store.dispatch to send event for changing events state
 
+	store.dispatch({ type: 'CHECK_STORY' });
+
 	// recursively calls loop method every second
 	setTimeout(loop.bind(this, store), interval);
 }
@@ -1145,6 +1149,12 @@ exports.default = function (store) {
 
 		handleStateChange(newState) {
 			// TODO: display story based on the state "resource" and "stories"
+			this.store.state.stories.forEach(story => {
+				if (story.state === 'visible') {
+					//this.appendChild(`<p>${story.desc}</p>`)
+					this.innerHTML = `<p>${story.description}</p>`;
+				}
+			});
 		}
 
 		connectedCallback() {

@@ -68,8 +68,8 @@ import StoryBookComponent from './views/story-book';
           |    Components    |<------------------------------+
           |                  |
           +------------------+
- */
-main();
+          */
+          main();
 
 // main function wraps everything at top level
 function main () {
@@ -77,16 +77,18 @@ function main () {
 	const initialState = {
 		example: 'Hello custom element',
 		counter: 0,
+
 		generators: [{type: 'autonomous',name: "tree",description: 'desc',rate: 10,quantity: 0, baseCost: 10,  unlockValue: 10},
 		{type: 'autonomous',name: "factory",description: 'desc',rate: 25,quantity: 0, baseCost: 35,  unlockValue: 35},
 		{type: 'autonomous',name: "rain",description: 'desc',rate: 45,quantity: 0, baseCost: 70,  unlockValue: 70}
 		],
+
 		stories: [{
-	name: 'Grandma shows up',
-	description: 'desc',
-	triggeredAt: 10,
-	state: 'hidden'
-}]
+			name: 'Grandma shows up',
+			description: 'A grandma showed up to make some cookies!!!!',
+			triggeredAt: 10,
+			state: 'hidden'
+		}]
 	};
 
 	// initialize store

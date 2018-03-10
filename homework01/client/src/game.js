@@ -27,6 +27,8 @@ export function loop (store) {
 	//       the `triggeredAt` points
 	// hint: use store.dispatch to send event for changing events state
 
+	store.dispatch({type: 'CHECK_STORY'});
+
 	// recursively calls loop method every second
 	setTimeout(loop.bind(this, store), interval);
 }
