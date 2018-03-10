@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.1.0/webcomponents-lite.js"></script>
+    <div class="main-vertical-container width-constraint">
+        <div class="game-title-row">
+            <header>
+                <h1>{Incremental Game}</h1>
+            </header>
+        </div>
+
+        <div class="story-line-row">
+            <div class="story-line-box">
+                <p>Nam, maecenas. Ligula pulvinar diam, metus venenatis curae; elit egestas interdum pretium nisl etiam. Praesent
+                    in mus. Eleifend etiam fusce gravida ac. Sollicitudin iaculis curabitur sapien phasellus. Dictumst eros.
+                    Hac ornare augue curabitur. Pede tincidunt. Placerat risus laoreet proin lectus primis commodo In sollicitudin
+                    congue interdum cum rutrum felis, gravida congue fringilla. Porta sit ante ullamcorper tempus nam pulvinar
+                tincidunt vivamus euismod fusce pharetra. Ullamcorper augue aptent pretium cum.</p>
+
+                <p>Eu litora nascetur cum duis scelerisque. Potenti habitasse imperdiet ornare congue, orci orci metus dictum.
+                    Per tincidunt fermentum orci, lorem urna felis metus pulvinar porta egestas nec viverra nisl elit augue
+                    nascetur elementum. Pellentesque dictum mollis elit facilisi. Libero penatibus, venenatis. Justo, tristique
+                    porttitor auctor sed leo nulla, class metus penatibus. Molestie scelerisque nec amet gravida. Congue
+                mollis mi ultrices eu. Aptent integer mollis.</p>
+                <p>Nam, maecenas. Ligula pulvinar diam, metus venenatis curae; elit egestas interdum pretium nisl etiam. Praesent
+                    in mus. Eleifend etiam fusce gravida ac. Sollicitudin iaculis curabitur sapien phasellus. Dictumst eros.
+                    Hac ornare augue curabitur. Pede tincidunt. Placerat risus laoreet proin lectus primis commodo In sollicitudin
+                    congue interdum cum rutrum felis, gravida congue fringilla. Porta sit ante ullamcorper tempus nam pulvinar
+                tincidunt vivamus euismod fusce pharetra. Ullamcorper augue aptent pretium cum.</p>
+
+                <p>Eu litora nascetur cum duis scelerisque. Potenti habitasse imperdiet ornare congue, orci orci metus dictum.
+                    Per tincidunt fermentum orci, lorem urna felis metus pulvinar porta egestas nec viverra nisl elit augue
+                    nascetur elementum. Pellentesque dictum mollis elit facilisi. Libero penatibus, venenatis. Justo, tristique
+                    porttitor auctor sed leo nulla, class metus penatibus. Molestie scelerisque nec amet gravida. Congue
+                mollis mi ultrices eu. Aptent integer mollis.</p>
+            </div>
+
+        </div>
+
+
+        <div class="resource-name-row">
+            <!-- <div class="resource-box-row">-->
+                <game-counter>
+                 <!--<div>-->
+                    <label for="">{Resource Name}:</label>
+                    <label id="count"></label>
+                    <!--</div>-->
+                </game-counter>  
+                <game-button>
+                    <button id="action_button">{Action}</button>
+                </game-button> 
+                <!-- </div>-->
+            </div>
+            <div class="generator-row">
+                <game-generator data-name="tree"  data-id="0" class="first-generator"></game-generator>
+
+                <game-generator data-name="factory"  data-id="1" class="second-generator"></game-generator>
+
+                <game-generator data-name="rain" data-id="2" class="third-generator"></game-generator>
+            </div>
+        </div>
+        <!-- end of main-vertical-container-->
+        
+        <script type="text/javascript" src="dest/app.bundle.js"></script>
+       <!-- <script type="text/javascript" src="app.js"></script>-->
+    </body>
+
+    </html>
