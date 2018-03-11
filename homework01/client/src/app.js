@@ -78,14 +78,14 @@ function main () {
 		example: 'Hello custom element',
 		counter: 0,
 
-		generators: [{type: 'autonomous',name: "tree",description: 'desc',rate: 10,quantity: 0, baseCost: 10,  unlockValue: 10},
+		generators: [{type: 'autonomous',name: "tree",description: 'desc',rate: 1,quantity: 0, baseCost: 10,  unlockValue: 10},
 					{type: 'autonomous',name: "factory",description: 'desc',rate: 25,quantity: 0, baseCost: 100,  unlockValue: 100},
 					{type: 'autonomous',name: "storm",description: 'desc',rate: 45,quantity: 0, baseCost: 150,  unlockValue: 150}
 					],
 
-		stories: [{name: 'MORE_CANDY:', description: 'I need more Reeces Pieces! ! !', triggeredAt: 10, state: 'hidden'},
-				  {name: 'Factory:', description: 'Reeces Pieces Factories have arrived! ! !', triggeredAt: 100, state: 'hidden'},
-				  {name: 'STORM:', description: 'I smell a storm brewing! ! !', triggeredAt: 150, state: 'hidden'}	  
+		stories: [{name: 'MORE_CANDY:', description: 'I need more Reese\'s Pieces! ! !', triggeredAt: 10, state: 'hidden'},
+				  {name: 'Factory:', description: 'Reese\'s Pieces Factories have arrived! ! !', triggeredAt: 100, state: 'hidden'},
+				  {name: 'STORM:', description: 'I smell a Reese\'s Pieces storm brewing! ! !', triggeredAt: 150, state: 'hidden'}	  
 				 ],
 	};
 

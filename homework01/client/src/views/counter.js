@@ -3,8 +3,6 @@ export default function (store) {
 		constructor () {
 			super();
 			this.store = store;
-			// TODO: render counter inner HTML based on the store state
-
 			this.onStateChange = this.handleStateChange.bind(this);
 		}
 

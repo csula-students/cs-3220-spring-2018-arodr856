@@ -1,3 +1,5 @@
+import constants from "../constants";
+import generator from "../models/generator";
 export default function (store) {
 	return class GeneratorComponent extends window.HTMLElement {
 		constructor () {
@@ -10,7 +12,7 @@ export default function (store) {
 			
 			this.querySelector(".resource-button").addEventListener('click', () => {
                 this.store.dispatch({
-                    type: 'BUY_GENERATOR',
+                    type: constants.actions.BUY_GENERATOR,
                     payload: {
                         quantity: 1,
                         name: this.dataset.name
@@ -27,6 +29,8 @@ export default function (store) {
                if(element.name === this.dataset.name){
                 this.querySelector('.count-label').textContent = element.quantity;
                 this.querySelector('.resource-button').textContent = element.unlockValue;
+                this.querySelector('.rate').textContent = ((element.quantity * element.rate) * 60) + " per minute";
+               
             }
         });
 
@@ -51,7 +55,7 @@ export default function (store) {
                         description
                     </label>
                     <en class="resource-button-container">  
-                        <label class="rate">45/60</label>
+                        <label class="rate"></label>
                         <button class="resource-button">${this.store.state.generators[this.dataset.id].baseCost}</button>
                     </en>`
         }

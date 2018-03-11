@@ -3,17 +3,13 @@ export default function (store) {
 		constructor () {
 			super();
 			this.store = store;
-			// TODO: initial DOM rendering of story itself
 			//this.innerHTML = this.render();
-
 			this.onStateChange = this.handleStateChange.bind(this);
 		}
 
 		handleStateChange (newState) {
-			// TODO: display story based on the state "resource" and "stories"
 			this.store.state.stories.forEach(story => {
 				if(story.state === 'visible'){
-					//this.appendChild(`<p>${story.desc}</p>`)
 					this.innerHTML += `<p>${story.name} <br> ${story.description}</p>`;
 				}
 			});

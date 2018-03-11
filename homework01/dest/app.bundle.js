@@ -73,8 +73,28 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+exports.default = {
+	growthRatio: 0.05,
+	actions: {
+		BUY_GENERATOR: 'BUY_GENERATOR',
+		EXAMPLE: 'EXAMPLE_MUTATION',
+		INCREMENT: 'INCREMENT',
+		CHECK_STORY: 'CHECK_STORY'
+	}
+};
 
-var _constants = __webpack_require__(1);
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _constants = __webpack_require__(0);
 
 var _constants2 = _interopRequireDefault(_constants);
 
@@ -116,31 +136,10 @@ class Generator {
   * @return {number} how much this generator generates
   */
 	generate() {
-
 		return this.rate * this.quantity;
 	}
 }
 exports.default = Generator;
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = {
-	growthRatio: 0.05,
-	actions: {
-		BUY_GENERATOR: 'BUY_GENERATOR',
-		EXAMPLE: 'EXAMPLE_MUTATION',
-		INCREMENT: 'INCREMENT',
-		CHECK_STORY: 'CHECK_STORY'
-	}
-};
 
 /***/ }),
 /* 2 */
@@ -251,9 +250,9 @@ function main() {
 		example: 'Hello custom element',
 		counter: 0,
 
-		generators: [{ type: 'autonomous', name: "tree", description: 'desc', rate: 10, quantity: 0, baseCost: 10, unlockValue: 10 }, { type: 'autonomous', name: "factory", description: 'desc', rate: 25, quantity: 0, baseCost: 100, unlockValue: 100 }, { type: 'autonomous', name: "storm", description: 'desc', rate: 45, quantity: 0, baseCost: 150, unlockValue: 150 }],
+		generators: [{ type: 'autonomous', name: "tree", description: 'desc', rate: 1, quantity: 0, baseCost: 10, unlockValue: 10 }, { type: 'autonomous', name: "factory", description: 'desc', rate: 25, quantity: 0, baseCost: 100, unlockValue: 100 }, { type: 'autonomous', name: "storm", description: 'desc', rate: 45, quantity: 0, baseCost: 150, unlockValue: 150 }],
 
-		stories: [{ name: 'MORE_CANDY:', description: 'I need more Reeces Pieces! ! !', triggeredAt: 10, state: 'hidden' }, { name: 'Factory:', description: 'Reeces Pieces Factories have arrived! ! !', triggeredAt: 100, state: 'hidden' }, { name: 'STORM:', description: 'I smell a storm brewing! ! !', triggeredAt: 150, state: 'hidden' }]
+		stories: [{ name: 'MORE_CANDY:', description: 'I need more Reese\'s Pieces! ! !', triggeredAt: 10, state: 'hidden' }, { name: 'Factory:', description: 'Reese\'s Pieces Factories have arrived! ! !', triggeredAt: 100, state: 'hidden' }, { name: 'STORM:', description: 'I smell a Reese\'s Pieces storm brewing! ! !', triggeredAt: 150, state: 'hidden' }]
 	};
 
 	// initialize store
@@ -711,9 +710,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.loop = loop;
 
-var _generator = __webpack_require__(0);
+var _generator = __webpack_require__(1);
 
 var _generator2 = _interopRequireDefault(_generator);
+
+var _constants = __webpack_require__(0);
+
+var _constants2 = _interopRequireDefault(_constants);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -725,10 +728,6 @@ const interval = 1000;
  * based on the interval variable configuration)
  */
 function loop(store) {
-	// TODO: increment counter based on the generators in the state
-	// hint: read how many "generators" in store and iterate through them to
-	//       count how many value to increment to "resource"
-	// hint: remember to change event through `store.dispatch`
 
 	let resourcesToAdd = 0;
 	store.state.generators.forEach(generator => {
@@ -736,16 +735,11 @@ function loop(store) {
 		resourcesToAdd += genModel.generate();
 	});
 	store.dispatch({
-		type: 'INCREMENT',
+		type: _constants2.default.actions.INCREMENT,
 		payload: resourcesToAdd
 	});
-	console.log(store.state.counter);
 
-	// TODO: triggers stories from story to display state if they are passed
-	//       the `triggeredAt` points
-	// hint: use store.dispatch to send event for changing events state
-
-	store.dispatch({ type: 'CHECK_STORY' });
+	store.dispatch({ type: _constants2.default.actions.CHECK_STORY });
 
 	// recursively calls loop method every second
 	setTimeout(loop.bind(this, store), interval);
@@ -834,7 +828,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = reducer;
 
-var _generator = __webpack_require__(0);
+var _generator = __webpack_require__(1);
 
 var _generator2 = _interopRequireDefault(_generator);
 
@@ -842,7 +836,7 @@ var _story = __webpack_require__(9);
 
 var _story2 = _interopRequireDefault(_story);
 
-var _constants = __webpack_require__(1);
+var _constants = __webpack_require__(0);
 
 var _constants2 = _interopRequireDefault(_constants);
 
@@ -860,7 +854,7 @@ function reducer(state, action) {
                     let genModel = new _generator2.default(generator);
                     let generatorCost = genModel.getCost();
                     if (generatorCost <= state.counter) {
-                        state.counter -= generatorCost;
+                        state.counter -= generatorCost.toFixed(2);
                         generator.quantity++;
                         generator.unlockValue = genModel.getCost();
                     }
@@ -878,13 +872,12 @@ function reducer(state, action) {
             state.stories.forEach(story => {
                 let storyModel = new _story2.default(story);
                 if (storyModel.isUnlockYet(state.counter)) {
-                    story.state = 'visible';
+                    storyModel.unlock();
+                    story.state = storyModel.state;
+                } else {
+                    story.state = 'hidden';
                 }
             });
-            return state;
-
-        case _constants2.default.actions.CHECK_STORY:
-
             return state;
         default:
             return state;
@@ -920,7 +913,6 @@ class Story {
   * @return {boolean} if this story is unlockable
   */
 	isUnlockYet(value) {
-		// TODO: implement based on doc
 		if (value >= this.triggeredAt) {
 			return true;
 		}
@@ -931,7 +923,6 @@ class Story {
   * unlock simply unlock the story to visible state
   */
 	unlock() {
-		// TODO: change the story state to "visible"
 		this.state = 'visible';
 	}
 }
@@ -953,16 +944,11 @@ exports.default = function (store) {
 		constructor() {
 			super();
 			this.store = store;
-
-			//this.onStateChange = this.handleStateChange.bind(this);
-
-			// TODO: add click event to increment counter
-			// hint: use "store.dispatch" method (see example component)
 		}
 		connectedCallback() {
 			this.addEventListener('click', () => {
 				this.store.dispatch({
-					type: 'INCREMENT',
+					type: _constants2.default.actions.INCREMENT,
 					payload: 1
 				});
 			});
@@ -973,6 +959,12 @@ exports.default = function (store) {
 		}
 	};
 };
+
+var _constants = __webpack_require__(0);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 /* 11 */
@@ -990,8 +982,6 @@ exports.default = function (store) {
 		constructor() {
 			super();
 			this.store = store;
-			// TODO: render counter inner HTML based on the store state
-
 			this.onStateChange = this.handleStateChange.bind(this);
 		}
 
@@ -1081,7 +1071,7 @@ exports.default = function (store) {
 
             this.querySelector(".resource-button").addEventListener('click', () => {
                 this.store.dispatch({
-                    type: 'BUY_GENERATOR',
+                    type: _constants2.default.actions.BUY_GENERATOR,
                     payload: {
                         quantity: 1,
                         name: this.dataset.name
@@ -1097,6 +1087,7 @@ exports.default = function (store) {
                 if (element.name === this.dataset.name) {
                     this.querySelector('.count-label').textContent = element.quantity;
                     this.querySelector('.resource-button').textContent = element.unlockValue;
+                    this.querySelector('.rate').textContent = element.quantity * element.rate * 60 + " per minute";
                 }
             });
         }
@@ -1120,13 +1111,23 @@ exports.default = function (store) {
                         description
                     </label>
                     <en class="resource-button-container">  
-                        <label class="rate">45/60</label>
+                        <label class="rate"></label>
                         <button class="resource-button">${this.store.state.generators[this.dataset.id].baseCost}</button>
                     </en>`;
         }
 
     };
 };
+
+var _constants = __webpack_require__(0);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+var _generator = __webpack_require__(1);
+
+var _generator2 = _interopRequireDefault(_generator);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 /* 14 */
@@ -1144,17 +1145,13 @@ exports.default = function (store) {
 		constructor() {
 			super();
 			this.store = store;
-			// TODO: initial DOM rendering of story itself
 			//this.innerHTML = this.render();
-
 			this.onStateChange = this.handleStateChange.bind(this);
 		}
 
 		handleStateChange(newState) {
-			// TODO: display story based on the state "resource" and "stories"
 			this.store.state.stories.forEach(story => {
 				if (story.state === 'visible') {
-					//this.appendChild(`<p>${story.desc}</p>`)
 					this.innerHTML += `<p>${story.name} <br> ${story.description}</p>`;
 				}
 			});

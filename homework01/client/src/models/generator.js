@@ -36,7 +36,6 @@ export default class Generator {
 	 * @return {number} how much this generator generates
 	 */
 	generate () {
-		
 		return this.rate * this.quantity;
 	}
 }
