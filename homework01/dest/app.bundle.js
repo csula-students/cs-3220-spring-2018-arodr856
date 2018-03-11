@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -74,7 +74,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _constants = __webpack_require__(6);
+var _constants = __webpack_require__(1);
 
 var _constants2 = _interopRequireDefault(_constants);
 
@@ -129,9 +129,29 @@ exports.default = Generator;
 "use strict";
 
 
-__webpack_require__(2);
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	growthRatio: 0.05,
+	actions: {
+		BUY_GENERATOR: 'BUY_GENERATOR',
+		EXAMPLE: 'EXAMPLE_MUTATION',
+		INCREMENT: 'INCREMENT',
+		CHECK_STORY: 'CHECK_STORY'
+	}
+};
 
-var _game = __webpack_require__(5);
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(3);
+
+var _game = __webpack_require__(6);
 
 var _store = __webpack_require__(7);
 
@@ -231,14 +251,9 @@ function main() {
 		example: 'Hello custom element',
 		counter: 0,
 
-		generators: [{ type: 'autonomous', name: "tree", description: 'desc', rate: 10, quantity: 0, baseCost: 10, unlockValue: 10 }, { type: 'autonomous', name: "factory", description: 'desc', rate: 25, quantity: 0, baseCost: 35, unlockValue: 35 }, { type: 'autonomous', name: "rain", description: 'desc', rate: 45, quantity: 0, baseCost: 70, unlockValue: 70 }],
+		generators: [{ type: 'autonomous', name: "tree", description: 'desc', rate: 10, quantity: 0, baseCost: 10, unlockValue: 10 }, { type: 'autonomous', name: "factory", description: 'desc', rate: 25, quantity: 0, baseCost: 100, unlockValue: 100 }, { type: 'autonomous', name: "storm", description: 'desc', rate: 45, quantity: 0, baseCost: 150, unlockValue: 150 }],
 
-		stories: [{
-			name: 'Grandma shows up',
-			description: 'A grandma showed up to make some cookies!!!!',
-			triggeredAt: 10,
-			state: 'hidden'
-		}]
+		stories: [{ name: 'MORE_CANDY:', description: 'I need more Reeces Pieces! ! !', triggeredAt: 10, state: 'hidden' }, { name: 'Factory:', description: 'Reeces Pieces Factories have arrived! ! !', triggeredAt: 100, state: 'hidden' }, { name: 'STORM:', description: 'I smell a storm brewing! ! !', triggeredAt: 150, state: 'hidden' }]
 	};
 
 	// initialize store
@@ -264,7 +279,7 @@ function main() {
 }
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function(){/*
@@ -465,10 +480,10 @@ Eg.whenReady(function(){requestAnimationFrame(function(){window.WebComponents.re
 
 //# sourceMappingURL=webcomponents-lite.js.map
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(5)))
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 var g;
@@ -495,7 +510,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -685,7 +700,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -735,26 +750,6 @@ function loop(store) {
 	// recursively calls loop method every second
 	setTimeout(loop.bind(this, store), interval);
 }
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = {
-	growthRatio: 0.05,
-	actions: {
-		BUY_GENERATOR: 'BUY_GENERATOR',
-		EXAMPLE: 'EXAMPLE_MUTATION',
-		INCREMENT: 'INCREMENT',
-		CHECK_STORY: 'CHECK_STORY'
-	}
-};
 
 /***/ }),
 /* 7 */
@@ -835,7 +830,7 @@ function deepCopy(obj) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 exports.default = reducer;
 
@@ -847,45 +842,53 @@ var _story = __webpack_require__(9);
 
 var _story2 = _interopRequireDefault(_story);
 
+var _constants = __webpack_require__(1);
+
+var _constants2 = _interopRequireDefault(_constants);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function reducer(state, action) {
-  switch (action.type) {
-    case 'EXAMPLE_MUTATION':
-      state.example = action.payload;
-      return state;
-    case 'BUY_GENERATOR':
-      state.generators.forEach(generator => {
-        if (generator.name === action.payload.name) {
-          let genModel = new _generator2.default(generator);
-          let generatorCost = genModel.getCost();
-          if (generatorCost <= state.counter) {
-            state.counter -= generatorCost;
-            generator.quantity++;
-            generator.unlockValue = genModel.getCost();
-          }
-          return state;
-        }
-      });
-      return state;
+    switch (action.type) {
+        case _constants2.default.actions.EXAMPLE:
+            state.example = action.payload;
+            return state;
 
-    case 'INCREMENT':
-      state.counter += action.payload;
-      return state;
+        case _constants2.default.actions.BUY_GENERATOR:
+            state.generators.forEach(generator => {
+                if (generator.name === action.payload.name) {
+                    let genModel = new _generator2.default(generator);
+                    let generatorCost = genModel.getCost();
+                    if (generatorCost <= state.counter) {
+                        state.counter -= generatorCost;
+                        generator.quantity++;
+                        generator.unlockValue = genModel.getCost();
+                    }
+                    return state;
+                }
+            });
+            return state;
 
-    case 'CHECK_STORY':
+        case _constants2.default.actions.INCREMENT:
+            state.counter += action.payload;
+            return state;
 
-      state.stories.forEach(story => {
-        let storyModel = new _story2.default(story);
-        if (storyModel.isUnlockYet(state.counter)) {
-          story.state = 'visible';
-        }
-      });
+        case _constants2.default.actions.CHECK_STORY:
 
-      return state;
-    default:
-      return state;
-  }
+            state.stories.forEach(story => {
+                let storyModel = new _story2.default(story);
+                if (storyModel.isUnlockYet(state.counter)) {
+                    story.state = 'visible';
+                }
+            });
+            return state;
+
+        case _constants2.default.actions.CHECK_STORY:
+
+            return state;
+        default:
+            return state;
+    }
 }
 
 /***/ }),
@@ -1142,7 +1145,7 @@ exports.default = function (store) {
 			super();
 			this.store = store;
 			// TODO: initial DOM rendering of story itself
-			this.innerHTML = this.render();
+			//this.innerHTML = this.render();
 
 			this.onStateChange = this.handleStateChange.bind(this);
 		}
@@ -1152,7 +1155,7 @@ exports.default = function (store) {
 			this.store.state.stories.forEach(story => {
 				if (story.state === 'visible') {
 					//this.appendChild(`<p>${story.desc}</p>`)
-					this.innerHTML = `<p>${story.description}</p>`;
+					this.innerHTML += `<p>${story.name} <br> ${story.description}</p>`;
 				}
 			});
 		}

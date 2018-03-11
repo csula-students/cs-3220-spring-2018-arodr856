@@ -79,16 +79,14 @@ function main () {
 		counter: 0,
 
 		generators: [{type: 'autonomous',name: "tree",description: 'desc',rate: 10,quantity: 0, baseCost: 10,  unlockValue: 10},
-		{type: 'autonomous',name: "factory",description: 'desc',rate: 25,quantity: 0, baseCost: 35,  unlockValue: 35},
-		{type: 'autonomous',name: "rain",description: 'desc',rate: 45,quantity: 0, baseCost: 70,  unlockValue: 70}
-		],
+					{type: 'autonomous',name: "factory",description: 'desc',rate: 25,quantity: 0, baseCost: 100,  unlockValue: 100},
+					{type: 'autonomous',name: "storm",description: 'desc',rate: 45,quantity: 0, baseCost: 150,  unlockValue: 150}
+					],
 
-		stories: [{
-			name: 'Grandma shows up',
-			description: 'A grandma showed up to make some cookies!!!!',
-			triggeredAt: 10,
-			state: 'hidden'
-		}]
+		stories: [{name: 'MORE_CANDY:', description: 'I need more Reeces Pieces! ! !', triggeredAt: 10, state: 'hidden'},
+				  {name: 'Factory:', description: 'Reeces Pieces Factories have arrived! ! !', triggeredAt: 100, state: 'hidden'},
+				  {name: 'STORM:', description: 'I smell a storm brewing! ! !', triggeredAt: 150, state: 'hidden'}	  
+				 ],
 	};
 
 	// initialize store

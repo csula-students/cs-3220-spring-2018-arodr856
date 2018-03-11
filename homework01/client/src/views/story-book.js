@@ -4,7 +4,7 @@ export default function (store) {
 			super();
 			this.store = store;
 			// TODO: initial DOM rendering of story itself
-			this.innerHTML = this.render();
+			//this.innerHTML = this.render();
 
 			this.onStateChange = this.handleStateChange.bind(this);
 		}
@@ -14,7 +14,7 @@ export default function (store) {
 			this.store.state.stories.forEach(story => {
 				if(story.state === 'visible'){
 					//this.appendChild(`<p>${story.desc}</p>`)
-					this.innerHTML = `<p>${story.description}</p>`;
+					this.innerHTML += `<p>${story.name} <br> ${story.description}</p>`;
 				}
 			});
 		}
