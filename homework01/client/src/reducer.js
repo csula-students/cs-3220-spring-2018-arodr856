@@ -28,7 +28,6 @@ export default function reducer (state, action) {
          return state;
 
      case constants.actions.CHECK_STORY:
-
          state.stories.forEach(story => {
            let storyModel = new Story(story);
            if (storyModel.isUnlockYet(state.counter)){
@@ -36,6 +35,7 @@ export default function reducer (state, action) {
               story.state = storyModel.state;
             }
             else{
+              
               story.state = 'hidden';
             }
          });
