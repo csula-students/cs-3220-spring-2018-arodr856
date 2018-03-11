@@ -868,13 +868,13 @@ function reducer(state, action) {
             return state;
 
         case _constants2.default.actions.CHECK_STORY:
-
             state.stories.forEach(story => {
                 let storyModel = new _story2.default(story);
                 if (storyModel.isUnlockYet(state.counter)) {
                     storyModel.unlock();
                     story.state = storyModel.state;
                 } else {
+
                     story.state = 'hidden';
                 }
             });
