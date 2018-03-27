@@ -18,15 +18,8 @@ import edu.csula.models.Event;
  * context name to separate out the different section of data (e.g. events vs
  * generators) so that you can have the application scope looks like below:
  *
- * ```json
- * {
- *   "events": [
- *     { "id": 0, "name": "event-1", "description": "..." }
- *   ],
- *   "generators": [
- *     { "id": 0, "name": "generator-1", "description": "..." }
- *   ]
- * }
+ * ```json { "events": [ { "id": 0, "name": "event-1", "description": "..." } ],
+ * "generators": [ { "id": 0, "name": "generator-1", "description": "..." } ] }
  * ```
  */
 public class EventsDAOImpl implements EventsDAO {
@@ -37,10 +30,11 @@ public class EventsDAOImpl implements EventsDAO {
 		this.context = context;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Event> getAll() {
 		// TODO: read a list of events from context
-		return new ArrayList<>();
+		return (Collection<Event>) this.context.getAttribute(CONTEXT_NAME);
 	}
 
 	@Override
