@@ -22,14 +22,11 @@ public class AdminEventsServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Override
-	public void init() {
-		ArrayList<Event> eventList = new ArrayList<Event>();
-		eventList.add(new Event(0, "rain", "Raining candy", 10));
-		eventList.add(new Event(1, "tree", "Candy growing on a tree", 20));
-		getServletContext().setAttribute("events", eventList);
-
-	}
+	// @Override
+	// public void init() {
+	// ArrayList<Event> eventList = new ArrayList<Event>();
+	// getServletContext().setAttribute("events", eventList);
+	// }
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,6 +34,7 @@ public class AdminEventsServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		// TODO: render the events page HTML
 		EventsDAO dao = new EventsDAOImpl(getServletContext());
+		getServletContext().setAttribute("dao", dao);
 		Collection<Event> events = dao.getAll();
 		System.out.println(events);
 		out.println("<!DOCTYPE html>");
@@ -44,48 +42,66 @@ public class AdminEventsServlet extends HttpServlet {
 		out.println("<head>");
 		out.println("<meta charset=\"UTF-8\">");
 		out.println("<title>Game Event</title>");
-		out.println(
-				"<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">\n"
-						+ "");
+		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"../app.css \">");
 		out.println("</head>");
 		out.println("<body>");
+
 		out.println("<h1>Incremental Game Framework</h1>");
-
-		out.println("<nav>");
-		out.println("<a href='../admin/generators'> Game Generator </a>");
-		out.println("</nav>");
-		out.println("<form class='form-group'>");
-		out.println("<label for='eventName'>Event Name:</label><br/>");
-		out.println("<input  type='text' id='eventName'/><br/>");
-
-		out.println("<label for='eventDesc'>Event Description :</label><br/>");
-		out.println("<textarea for='eventDesc' ></textarea><br/>");
-
-		out.println("<label for='trigger'>Trigger at:</label><br/>");
-		out.println("<input type='number' id='trigger'/>");
+		out.println("<div class=\"nav-bar\">");
+		out.println("	<nav>");
+		out.println("		<a href=\"#\" class=\"nav-item\">Game Information</a> |");
+		out.println("		<a href=\"#\" class=\"nav-item\">Generators</a> |");
+		out.println("		<a href=\"#\" class=\"nav-item\">Events</a>");
+		out.println("	</nav>");
+		out.println("</div>");
+		out.println("<div class=\"container\">");
+		out.println("	<div class=\"left-side\">");
+		out.println("	<form class=\"event-form\" action=\"events\" method=\"post\">");
+		out.println("			<label for=\"eventName\">Event Name:</label>");
+		out.println("		<input type=\"text\" name=\"name\" id=\"eventName\" class=\"form-input\">");
+		out.println("<label for=\"eventDescription\">Event Description</label>");
+		out.println("<textarea id=\"eventDescription\" name=\"descTextArea\"></textarea>");
+		out.println("<label for=\"trigger\">Trigger at:</label>");
+		out.println("<input type=\"number\" name=\"triggerInput\" id=\"trigger\" class=\"form-input\">");
+		out.println("<button class=\"form-submit\" type=\"submit\">Add</button>");
 		out.println("</form>");
-		out.println("<table class='table table-striped table-dark table-hover'>");
-
-		out.println("<thead><tr>");
-		out.println("<th>Name</th><th>Description</th><th>TriggerAt</th>");
-		out.println("</tr></thead>");
-		out.println("<tbody>");
-
+		out.println("</div>");
+		out.println("<div class=\"right-side\">");
+		out.println("<table class=\"event-table\">");
+		out.println("<tr>");
+		out.println("<th>Name</th>");
+		out.println("<th>Description</th>");
+		out.println("<th>TriggerAt</th>");
+		out.println("<th>Action</th>");
+		out.println("</tr>");
 		for (Event event : events) {
 			out.println("<tr>");
+			out.println("<td>" + event.getName() + "</td>");
+			out.println("<td>" + event.getDescription() + "</td>");
+			out.println("<td>" + event.getTriggerAt() + "</td>");
+			out.println("<td>");
+			out.println("<a href=\"EditServlet?id=" + event.getId() + "\"\">Edit</a>");
+			out.println("<a href=\"DeleteServlet?id=" + event.getId() + "\">delete</a> ");
 
-			out.println("<td>" + event.getName() + "</td>" + "<td>" + event.getDescription() + "</td>" + "<td>"
-					+ event.getTriggerAt() + "</td>");
+			out.println("</td>");
 			out.println("</tr>");
 		}
-		out.println("</tbody>");
+
 		out.println("</table>");
+		out.println("</div>");
+		out.println("</div>");
+
 		out.println("</body>");
 		out.println("</html>");
 	}
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO: handle upsert transaction
+		EventsDAOImpl dao = (EventsDAOImpl) getServletContext().getAttribute("dao");
+		String name = request.getParameter("name");
+		String description = request.getParameter("descTextArea");
+		int trigger = Integer.parseInt(request.getParameter("triggerInput"));
+		dao.add(new Event(dao.getAll().size() + 1, name, description, trigger));
+		response.sendRedirect("events");
 	}
 }

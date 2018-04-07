@@ -28,7 +28,7 @@ public class Event {
 	public int getTriggerAt() {
 		return triggerAt;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {

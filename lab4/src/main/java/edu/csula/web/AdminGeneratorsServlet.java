@@ -22,7 +22,7 @@ public class AdminGeneratorsServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		// TODO: render the generators page HTML
 		out.println("<h1>Welcome to the Generators page!</h1>");
-		out.println("<a href='../admin/events'>Link To Events Page</a>");
+		out.println("<a href='events'>Link To Events Page</a>");
 	}
 
 	@Override

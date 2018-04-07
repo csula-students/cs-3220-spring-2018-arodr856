@@ -1,18 +1,22 @@
 package edu.csula.storage.servlet;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
 import javax.servlet.ServletContext;
 
+import org.junit.Before;
+import org.junit.Test;
+
 import edu.csula.models.Event;
 import edu.csula.storage.EventsDAO;
-
-import org.junit.*;
-
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 public class EventsDAOImplTest {
 	private ServletContext context;
@@ -36,7 +40,7 @@ public class EventsDAOImplTest {
 
 		// assert and verify
 		verify(context).getAttribute(EventsDAOImpl.CONTEXT_NAME);
-		assertEquals(actualEvents.size(), 1);
+		assertEquals(1, actualEvents.size());
 	}
 
 	@Test
@@ -46,7 +50,7 @@ public class EventsDAOImplTest {
 		Collection<Event> actualEvents = dao.getAll();
 
 		// should return an empty list
-		assertEquals(actualEvents.size(), 0);
+		assertEquals(0, actualEvents.size());
 	}
 
 	@Test
@@ -62,7 +66,7 @@ public class EventsDAOImplTest {
 		// assert and verify
 		verify(context).getAttribute(EventsDAOImpl.CONTEXT_NAME);
 		assertTrue(actualEvent.isPresent());
-		assertEquals(actualEvent.get(), new Event(1, "name", "desc", 10));
+		assertEquals(new Event(1, "name", "desc", 10), actualEvent.get());
 	}
 
 	@Test
@@ -85,12 +89,13 @@ public class EventsDAOImplTest {
 	@Test
 	public void add() throws Exception {
 		// set up
+
 		when(context.getAttribute(EventsDAOImpl.CONTEXT_NAME)).thenReturn(null);
 		Collection<Event> expected = new ArrayList<>();
 		expected.add(new Event(1, "new event", "description", 10));
 		// actual execution
 		dao.add(new Event(1, "new event", "description", 10));
 		// verify
-		assertEquals(dao.getAll(), expected);
+		assertEquals(expected, dao.getAll());
 	}
 }
