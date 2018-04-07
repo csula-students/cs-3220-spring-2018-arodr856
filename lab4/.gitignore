@@ -20,9 +20,9 @@ src/main/webapp/js/app.bundle.js.map
 
 tags*
 
-.settings/
-.project/
-.classpath/
+.settings/*
+.project/*
+.classpath/*
 
 dest/
 /bin/
