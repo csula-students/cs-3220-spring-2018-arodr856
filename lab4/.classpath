@@ -1,45 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/test/java"/>
-	<classpathentry kind="lib" path="gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-9/"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/annotations-api.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/catalina-ant.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/catalina-ha.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/catalina-storeconfig.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/catalina-tribes.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/catalina.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/ecj-4.6.3.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/el-api.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/jasper-el.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/jasper.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/jaspic-api.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/jsp-api.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/jstl.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/mysql-connector-java-5.1.45-bin.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/standard.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/tomcat-api.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/tomcat-coyote.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/tomcat-dbcp.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/tomcat-i18n-es.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/tomcat-i18n-fr.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/tomcat-i18n-ja.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/tomcat-jdbc.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/tomcat-jni.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/tomcat-util-scan.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/tomcat-util.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/tomcat-websocket.jar"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/apache-tomcat-8.5.28/lib/websocket-api.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
-	<classpathentry kind="lib" path="/Users/AlexRodriguez/Desktop/mockito-all-2.0.2-beta.jar"/>
+	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
