@@ -41,7 +41,7 @@ public class GeneratorsDAOImplTest {
 		when(context.getAttribute(GeneratorsDAOImpl.CONTEXT_NAME)).thenReturn(mockList);
 
 		// actual method execution
-		//List<Generator> actual = dao.getAll();
+		List<Generator> actual = dao.getAll();
 
 		// assert and verify
 		verify(context).getAttribute(GeneratorsDAOImpl.CONTEXT_NAME);
