@@ -22,77 +22,26 @@ public class AdminEventsServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	// @Override
-	// public void init() {
-	// ArrayList<Event> eventList = new ArrayList<Event>();
-	// getServletContext().setAttribute("events", eventList);
-	// }
+//	@Override
+//	public void init() {
+//		Collection<Event> list = new ArrayList<>();
+//		list.add(new Event(12, "random", "random desc", 123));
+//		list.add(new Event(12, "random", "random desc", 123));
+//		list.add(new Event(12, "random", "random desc", 123));
+//		list.add(new Event(12, "random", "random desc", 123));
+//		getServletContext().setAttribute("events", list);
+//	}
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
+		// PrintWriter out = response.getWriter();
 		// TODO: render the events page HTML
 		EventsDAO dao = new EventsDAOImpl(getServletContext());
 		getServletContext().setAttribute("dao", dao);
 		Collection<Event> events = dao.getAll();
-		System.out.println(events);
-		out.println("<!DOCTYPE html>");
-		out.println("<html>");
-		out.println("<head>");
-		out.println("<meta charset=\"UTF-8\">");
-		out.println("<title>Game Event</title>");
-		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"../app.css \">");
-		out.println("</head>");
-		out.println("<body>");
-
-		out.println("<h1>Incremental Game Framework</h1>");
-		out.println("<div class=\"nav-bar\">");
-		out.println("	<nav>");
-		out.println("		<a href=\"#\" class=\"nav-item\">Game Information</a> |");
-		out.println("		<a href=\"#\" class=\"nav-item\">Generators</a> |");
-		out.println("		<a href=\"#\" class=\"nav-item\">Events</a>");
-		out.println("	</nav>");
-		out.println("</div>");
-		out.println("<div class=\"container\">");
-		out.println("	<div class=\"left-side\">");
-		out.println("	<form class=\"event-form\" action=\"events\" method=\"post\">");
-		out.println("			<label for=\"eventName\">Event Name:</label>");
-		out.println("		<input type=\"text\" name=\"name\" id=\"eventName\" class=\"form-input\">");
-		out.println("<label for=\"eventDescription\">Event Description</label>");
-		out.println("<textarea id=\"eventDescription\" name=\"descTextArea\"></textarea>");
-		out.println("<label for=\"trigger\">Trigger at:</label>");
-		out.println("<input type=\"number\" name=\"triggerInput\" id=\"trigger\" class=\"form-input\">");
-		out.println("<button class=\"form-submit\" type=\"submit\">Add</button>");
-		out.println("</form>");
-		out.println("</div>");
-		out.println("<div class=\"right-side\">");
-		out.println("<table class=\"event-table\">");
-		out.println("<tr>");
-		out.println("<th>Name</th>");
-		out.println("<th>Description</th>");
-		out.println("<th>TriggerAt</th>");
-		out.println("<th>Action</th>");
-		out.println("</tr>");
-		for (Event event : events) {
-			out.println("<tr>");
-			out.println("<td>" + event.getName() + "</td>");
-			out.println("<td>" + event.getDescription() + "</td>");
-			out.println("<td>" + event.getTriggerAt() + "</td>");
-			out.println("<td>");
-			out.println("<a href=\"EditServlet?id=" + event.getId() + "\"\">Edit</a>");
-			out.println("<a href=\"DeleteServlet?id=" + event.getId() + "\">delete</a> ");
-
-			out.println("</td>");
-			out.println("</tr>");
-		}
-
-		out.println("</table>");
-		out.println("</div>");
-		out.println("</div>");
-
-		out.println("</body>");
-		out.println("</html>");
+		request.setAttribute("events", events);
+		request.getRequestDispatcher("../WEB-INF/admin-events.jsp").forward(request, response);
 	}
 
 	@Override
@@ -102,6 +51,8 @@ public class AdminEventsServlet extends HttpServlet {
 		String description = request.getParameter("descTextArea");
 		int trigger = Integer.parseInt(request.getParameter("triggerInput"));
 		dao.add(new Event(dao.getAll().size() + 1, name, description, trigger));
-		response.sendRedirect("events");
+		// response.sendRedirect("events");
+		request.setAttribute("events", dao.getAll());
+		request.getRequestDispatcher("../WEB-INF/admin-events.jsp").forward(request, response);
 	}
 }
