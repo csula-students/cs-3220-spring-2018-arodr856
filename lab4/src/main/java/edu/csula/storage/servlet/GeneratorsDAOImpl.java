@@ -1,6 +1,7 @@
 package edu.csula.storage.servlet;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,15 +19,8 @@ import edu.csula.storage.GeneratorsDAO;
  * context name to separate out the different section of data (e.g. events vs
  * generators) so that you can have the application scope looks like below:
  *
- * ```json
- * {
- *   "events": [
- *     { "id": 0, "name": "event-1", "description": "..." }
- *   ],
- *   "generators": [
- *     { "id": 0, "name": "generator-1", "description": "..." }
- *   ]
- * }
+ * ```json { "events": [ { "id": 0, "name": "event-1", "description": "..." } ],
+ * "generators": [ { "id": 0, "name": "generator-1", "description": "..." } ] }
  * ```
  */
 public class GeneratorsDAOImpl implements GeneratorsDAO {
@@ -39,28 +33,53 @@ public class GeneratorsDAOImpl implements GeneratorsDAO {
 
 	@Override
 	public List<Generator> getAll() {
-		// TODO: get a list of generators from the context
-		return new ArrayList<>();
+		List<Generator> list = (List<Generator>) this.context.getAttribute(CONTEXT_NAME);
+		if (list != null) {
+			return list;
+		} else {
+			list = new ArrayList<>();
+			this.context.setAttribute(CONTEXT_NAME, list);
+			return list;
+		}
+
 	}
 
 	@Override
 	public Optional<Generator> getById(int id) {
-		// TODO: get a certain generator from context
+		for (Generator gen : getAll()) {
+			if (gen.getId() == id) {
+				return Optional.of(gen);
+			}
+		}
 		return Optional.empty();
 	}
 
 	@Override
 	public void set(int id, Generator generator) {
-		// TODO: change a certain generator from context
+		List<Generator> list = this.getAll();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getId() == id) {
+				list.set(i, generator);
+				break;
+			}
+		}
 	}
 
 	@Override
 	public void add(Generator generator) {
-		// TODO: add a new generator to the context
+		this.getAll().add(generator);
 	}
 
-	
 	public void remove(int id) {
-		// TODO: remove a single generator from the context
+		List<Generator> list = this.getAll();
+		Iterator<Generator> i = list.iterator();
+		while (i.hasNext()) {
+			Generator gen = i.next();
+			if (gen.getId() == id) {
+				i.remove();
+				break;
+			}
+		}
 	}
+
 }
