@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.csula.storage.servlet.UsersDAOImpl;
+
 @WebServlet("/admin/auth")
 public class AuthenticationServlet extends HttpServlet {
 	@Override
@@ -35,14 +37,13 @@ public class AuthenticationServlet extends HttpServlet {
 		out.println("<h1>Hello login servlet!</h1>");
 		out.println("<div class=\"container\">");
 
-		out.println("	<form action='' method='POST' >");
+		out.println("	<form action='auth' method='POST' >");
 		
-		out.println("		<label for='userName'>");
+		out.println("		<label for='userName'>Username: </label>");
 		out.println("		<input type='text' name='userName' id='userName'>");
-		out.println("		<label for='password'>");
-		out.println("		<input type='text' name='password' id='password'>");
-		
-		
+		out.println("		<label for='password'>Password: </label>");
+		out.println("		<input type='password' name='password' id='password'>");
+		out.println("		<button>Login</button>");	
 		out.println("	</form>");
 		out.println("</div>");
 		out.println("</body>");
@@ -52,7 +53,15 @@ public class AuthenticationServlet extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO: handle login
+		UsersDAOImpl udi = new UsersDAOImpl(request.getSession());
+		String userName = request.getParameter("userName");
+		String password = request.getParameter("password");
+
+		if (udi.authenticate(userName, password)) {
+			response.sendRedirect("events");
+		}else {
+			response.sendRedirect("auth");
+		}
 	}
 
 	@Override
