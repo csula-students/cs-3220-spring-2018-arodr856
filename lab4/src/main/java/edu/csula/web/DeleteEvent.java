@@ -16,14 +16,14 @@ import edu.csula.storage.servlet.EventsDAOImpl;
 /**
  * Servlet implementation class DeleteServlet
  */
-@WebServlet("/admin/DeleteServlet")
-public class DeleteServlet extends HttpServlet {
+@WebServlet("/admin/DeleteEvent")
+public class DeleteEvent extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DeleteServlet() {
+	public DeleteEvent() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

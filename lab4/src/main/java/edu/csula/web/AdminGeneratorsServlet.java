@@ -49,11 +49,11 @@ public class AdminGeneratorsServlet extends HttpServlet {
 		out.println("</div>");
 		out.println("<div class=\"container\">");
 		out.println("	<div class=\"left-side\">");
-		out.println("	<form class=\"event-form\" action=\"events\" method=\"post\">");
+		out.println("	<form class=\"event-form\" action=\"generators\" method=\"post\">");
 		out.println("			<label for=\"generatorName\">Generator Name:</label>");
 		out.println("			<input type=\"text\" name=\"name\" id=\"generatorName\" class=\"form-input\">");
 		out.println("			<label for=\"generatorRate\">Generator Rate</label>");
-		out.println("			<input type=\"text\" name=\"rate\" id=\"generatorRate\" class=\"form-input\">");
+		out.println("			<input type=\"number\" name=\"rate\" id=\"generatorRate\" class=\"form-input\">");
 		out.println("			<label for=\"baseCost\">Base Cost</label>");
 		out.println("			<input type=\"number\" name=\"baseCost\" id=\"baseCost\" class=\"form-input\">");
 		out.println("			<label for=\"unlock\">Unlock At</label>");
@@ -80,8 +80,8 @@ public class AdminGeneratorsServlet extends HttpServlet {
 			out.println("<td>" + generator.getBaseCost() + "</td>");
 			out.println("<td>" + generator.getUnlockAt() + "</td>");
 			out.println("<td>");
-			out.println("<a href=\"EditServlet?id=" + generator.getId() + "\"\">Edit</a>");
-			out.println("<a href=\"DeleteServlet?id=" + generator.getId() + "\">delete</a> ");
+			out.println("<a href=\"EditGenerator?id=" + generator.getId() + "\"\">Edit</a>");
+			out.println("<a href=\"DeleteGenerator?id=" + generator.getId() + "\">delete</a> ");
 
 			out.println("</td>");
 			out.println("</tr>");
@@ -99,5 +99,13 @@ public class AdminGeneratorsServlet extends HttpServlet {
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO: handle upsert transaction
+		GeneratorsDAOImpl gdi = new GeneratorsDAOImpl(getServletContext());
+		String name = request.getParameter("name");
+		int rate = Integer.parseInt(request.getParameter("rate"));
+		int baseCost = Integer.parseInt(request.getParameter("baseCost"));
+		int unlock = Integer.parseInt(request.getParameter("unlock"));
+		String desc = request.getParameter("descTextArea");
+		gdi.add(new Generator(gdi.getAll().size(), name, desc, rate, baseCost, unlock));
+		response.sendRedirect("generators");
 	}
 }

@@ -34,7 +34,7 @@ public class AdminEventsServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		// TODO: render the events page HTML
 		EventsDAO dao = new EventsDAOImpl(getServletContext());
-		getServletContext().setAttribute("dao", dao);
+		// getServletContext().setAttribute("dao", dao);
 		Collection<Event> events = dao.getAll();
 		System.out.println(events);
 		out.println("<!DOCTYPE html>");
@@ -80,8 +80,8 @@ public class AdminEventsServlet extends HttpServlet {
 			out.println("<td>" + event.getDescription() + "</td>");
 			out.println("<td>" + event.getTriggerAt() + "</td>");
 			out.println("<td>");
-			out.println("<a href=\"EditServlet?id=" + event.getId() + "\"\">Edit</a>");
-			out.println("<a href=\"DeleteServlet?id=" + event.getId() + "\">delete</a> ");
+			out.println("<a href=\"EditEvent?id=" + event.getId() + "\"\">Edit</a>");
+			out.println("<a href=\"DeleteEvent?id=" + event.getId() + "\">delete</a> ");
 
 			out.println("</td>");
 			out.println("</tr>");
@@ -97,7 +97,8 @@ public class AdminEventsServlet extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EventsDAOImpl dao = (EventsDAOImpl) getServletContext().getAttribute("dao");
+		// EventsDAOImpl dao = (EventsDAOImpl) getServletContext().getAttribute("dao");
+		EventsDAOImpl dao = new EventsDAOImpl(getServletContext());
 		String name = request.getParameter("name");
 		String description = request.getParameter("descTextArea");
 		int trigger = Integer.parseInt(request.getParameter("triggerInput"));

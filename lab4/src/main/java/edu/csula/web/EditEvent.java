@@ -16,14 +16,14 @@ import edu.csula.storage.servlet.EventsDAOImpl;
 /**
  * Servlet implementation class EditServlet
  */
-@WebServlet("/admin/EditServlet")
-public class EditServlet extends HttpServlet {
+@WebServlet("/admin/EditEvent")
+public class EditEvent extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public EditServlet() {
+	public EditEvent() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -39,7 +39,8 @@ public class EditServlet extends HttpServlet {
 		// Get a Print Writer
 		PrintWriter out = response.getWriter();
 		int id = Integer.parseInt(request.getParameter("id"));
-		EventsDAOImpl dao = (EventsDAOImpl) getServletContext().getAttribute("dao");
+		// EventsDAOImpl dao = (EventsDAOImpl) getServletContext().getAttribute("dao");
+		EventsDAOImpl dao = new EventsDAOImpl(getServletContext());
 		Event event = null;
 		for (Event x : dao.getAll()) {
 			if (id == x.getId()) {
@@ -61,7 +62,7 @@ public class EditServlet extends HttpServlet {
 		out.println("</head>");
 		out.println("<body>");
 		out.println("<div class=\"container\">");
-		out.println("<form action=\"EditServlet?id=" + id + "\" method=\"post\">");
+		out.println("<form action=\"EditEvent?id=" + id + "\" method=\"post\">");
 		out.println("		<label for=\"eventName\">Event Name:</label>");
 		out.println("		<input type=\"text\" name=\"name\" id=\"eventName\" class=\"form-input\" value="
 				+ event.getName() + ">");
@@ -91,7 +92,8 @@ public class EditServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		int id = Integer.parseInt(request.getParameter("id"));
-		EventsDAOImpl dao = (EventsDAOImpl) getServletContext().getAttribute("dao");
+//		EventsDAOImpl dao = (EventsDAOImpl) getServletContext().getAttribute("dao");
+		EventsDAOImpl dao = new EventsDAOImpl(getServletContext());
 		String name = request.getParameter("name");
 		String description = request.getParameter("descTextArea");
 		int triggerAt = Integer.parseInt(request.getParameter("triggerInput"));
