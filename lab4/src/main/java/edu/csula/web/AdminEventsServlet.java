@@ -50,8 +50,8 @@ public class AdminEventsServlet extends HttpServlet {
 		out.println("<div class=\"nav-bar\">");
 		out.println("	<nav>");
 		out.println("		<a href=\"#\" class=\"nav-item\">Game Information</a> |");
-		out.println("		<a href=\"#\" class=\"nav-item\">Generators</a> |");
-		out.println("		<a href=\"#\" class=\"nav-item\">Events</a>");
+		out.println("		<a href=\"generators\" class=\"nav-item\">Generators</a> |");
+		out.println("		<a href=\"events\" class=\"nav-item\">Events</a>");
 		out.println("	</nav>");
 		out.println("</div>");
 		out.println("<div class=\"container\">");

@@ -43,4 +43,5 @@ public class UsersDAOImpl implements UsersDAO {
 		// TOOD: log user out using `invalidate`
 		this.context.invalidate();
 	}
+
 }
