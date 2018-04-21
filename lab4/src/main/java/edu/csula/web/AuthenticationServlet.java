@@ -2,7 +2,6 @@ package edu.csula.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +13,11 @@ import edu.csula.storage.servlet.UsersDAOImpl;
 
 @WebServlet("/admin/auth")
 public class AuthenticationServlet extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Set the content type to HTML

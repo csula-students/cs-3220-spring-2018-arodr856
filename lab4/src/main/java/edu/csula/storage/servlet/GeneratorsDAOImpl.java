@@ -31,6 +31,7 @@ public class GeneratorsDAOImpl implements GeneratorsDAO {
 		this.context = context;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Generator> getAll() {
 		List<Generator> list = (List<Generator>) this.context.getAttribute(CONTEXT_NAME);

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import edu.csula.models.Event;
 import edu.csula.storage.EventsDAO;
 import edu.csula.storage.servlet.EventsDAOImpl;
+import edu.csula.storage.servlet.UsersDAOImpl;
 
 @WebServlet("/admin/events")
 public class AdminEventsServlet extends HttpServlet {
@@ -22,19 +23,16 @@ public class AdminEventsServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	// @Override
-	// public void init() {
-	// ArrayList<Event> eventList = new ArrayList<Event>();
-	// getServletContext().setAttribute("events", eventList);
-	// }
-
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		// TODO: render the events page HTML
+		UsersDAOImpl udi = new UsersDAOImpl(request.getSession());
+		if (!udi.getAuthenticatedUser().isPresent()) {
+			response.sendRedirect("auth");
+		}
+
 		EventsDAO dao = new EventsDAOImpl(getServletContext());
-		// getServletContext().setAttribute("dao", dao);
 		Collection<Event> events = dao.getAll();
 		System.out.println(events);
 		out.println("<!DOCTYPE html>");
@@ -51,7 +49,9 @@ public class AdminEventsServlet extends HttpServlet {
 		out.println("	<nav>");
 		out.println("		<a href=\"#\" class=\"nav-item\">Game Information</a> |");
 		out.println("		<a href=\"generators\" class=\"nav-item\">Generators</a> |");
-		out.println("		<a href=\"events\" class=\"nav-item\">Events</a>");
+		out.println("		<a href=\"events\" class=\"nav-item\">Events</a> | ");
+		out.println("		<a href=\"LogOut\" class=\"nav-item\" id='logout'>Log out</a>");
+
 		out.println("	</nav>");
 		out.println("</div>");
 		out.println("<div class=\"container\">");
@@ -97,7 +97,6 @@ public class AdminEventsServlet extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// EventsDAOImpl dao = (EventsDAOImpl) getServletContext().getAttribute("dao");
 		EventsDAOImpl dao = new EventsDAOImpl(getServletContext());
 		String name = request.getParameter("name");
 		String description = request.getParameter("descTextArea");

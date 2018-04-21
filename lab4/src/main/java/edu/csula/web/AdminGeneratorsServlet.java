@@ -3,6 +3,7 @@ package edu.csula.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.csula.models.Generator;
 import edu.csula.storage.servlet.GeneratorsDAOImpl;
+import edu.csula.storage.servlet.UsersDAOImpl;
 
 @WebServlet("/admin/generators")
 public class AdminGeneratorsServlet extends HttpServlet {
@@ -24,8 +26,11 @@ public class AdminGeneratorsServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		// TODO: render the events page HTML
-		// EventsDAO dao = new EventsDAOImpl(getServletContext());
+		UsersDAOImpl udi = new UsersDAOImpl(request.getSession());
+		if (!udi.getAuthenticatedUser().isPresent()) {
+			response.sendRedirect("auth");
+		}
+
 		GeneratorsDAOImpl gdi = new GeneratorsDAOImpl(request.getServletContext());
 		getServletContext().setAttribute("dao", gdi);
 		List<Generator> generators = gdi.getAll();
@@ -41,10 +46,11 @@ public class AdminGeneratorsServlet extends HttpServlet {
 
 		out.println("<h1>Incremental Game Framework</h1>");
 		out.println("<div class=\"nav-bar\">");
-		out.println("	<nav>");
+		out.println("	<nav class='nav-b'>");
 		out.println("		<a href=\"#\" class=\"nav-item\">Game Information</a> |");
 		out.println("		<a href=\"generators\" class=\"nav-item\">Generators</a> |");
-		out.println("		<a href=\"events\" class=\"nav-item\">Events</a>");
+		out.println("		<a href=\"events\" class=\"nav-item\">Events</a> | ");
+		out.println("		<a href=\"LogOut\" class=\"nav-item\">Log out</a>");
 		out.println("	</nav>");
 		out.println("</div>");
 		out.println("<div class=\"container\">");
@@ -98,7 +104,6 @@ public class AdminGeneratorsServlet extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO: handle upsert transaction
 		GeneratorsDAOImpl gdi = new GeneratorsDAOImpl(getServletContext());
 		String name = request.getParameter("name");
 		int rate = Integer.parseInt(request.getParameter("rate"));

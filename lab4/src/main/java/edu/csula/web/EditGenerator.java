@@ -3,7 +3,6 @@ package edu.csula.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.prefs.PreferenceChangeEvent;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
