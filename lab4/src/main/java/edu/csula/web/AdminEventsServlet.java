@@ -18,9 +18,7 @@ import edu.csula.storage.servlet.UsersDAOImpl;
 
 @WebServlet("/admin/events")
 public class AdminEventsServlet extends HttpServlet {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	@Override
