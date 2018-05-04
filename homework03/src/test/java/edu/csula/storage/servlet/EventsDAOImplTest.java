@@ -1,5 +1,14 @@
 package edu.csula.storage.servlet;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -7,14 +16,12 @@ import java.util.Optional;
 
 import javax.servlet.ServletContext;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.stubbing.Answer;
+
 import edu.csula.models.Event;
 import edu.csula.storage.EventsDAO;
-
-import org.junit.*;
-
-import org.mockito.stubbing.Answer;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 public class EventsDAOImplTest {
 	private ServletContext context;

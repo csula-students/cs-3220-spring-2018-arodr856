@@ -49,7 +49,8 @@
 						<td>${gen.getRate()}</td>
 						<td>${gen.getBaseCost()}</td>
 						<td>${gen.getUnlockAt()}</td>
-						<td><a>Edit</a> <a>delete</a></td>
+						<td><a href='../admin/EditGenerator?id=${gen.getId()}'>Edit</a>
+							<a href='../admin/DeleteGenerator?id=${gen.getId()}'>delete</a></td>
 					</tr>
 				</c:forEach>
 

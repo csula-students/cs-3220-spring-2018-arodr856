@@ -44,7 +44,7 @@
 					<td>${event.getName()}</td>
 					<td>${event.getDescription()}</td>
 					<td>${event.getTriggerAt()}</td>
-					<td>Edit/Delete</td>
+					<td><a href='../admin/EditEvent?id=${event.getId()}'>Edit</a> <a href='../admin/DeleteEvent?id=${event.getId()}'>Delete</a></td>
 					
 					</tr>
 
