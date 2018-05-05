@@ -12,14 +12,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.csula.models.Event;
+import edu.csula.models.Generator;
 import edu.csula.storage.EventsDAO;
+import edu.csula.storage.GeneratorsDAO;
 import edu.csula.storage.servlet.EventsDAOImpl;
+import edu.csula.storage.servlet.GeneratorsDAOImpl;
 import edu.csula.storage.servlet.UsersDAOImpl;
 
 @WebServlet("/admin/events")
 public class AdminEventsServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	
+	
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

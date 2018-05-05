@@ -1,70 +1,69 @@
-/** *** */ (function(modules) { // webpackBootstrap
-/** *** */ 	// The module cache
-/** *** */ 	var installedModules = {};
-/** *** */
-/** *** */ 	// The require function
-/** *** */ 	function __webpack_require__(moduleId) {
-/** *** */
-/** *** */ 		// Check if module is in cache
-/** *** */ 		if(installedModules[moduleId]) {
-/** *** */ 			return installedModules[moduleId].exports;
-/** *** */ 		}
-/** *** */ 		// Create a new module (and put it into the cache)
-/** *** */ 		var module = installedModules[moduleId] = {
-/** *** */ 			i: moduleId,
-/** *** */ 			l: false,
-/** *** */ 			exports: {}
-/** *** */ 		};
-/** *** */
-/** *** */ 		// Execute the module function
-/** *** */ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/** *** */
-/** *** */ 		// Flag the module as loaded
-/** *** */ 		module.l = true;
-/** *** */
-/** *** */ 		// Return the exports of the module
-/** *** */ 		return module.exports;
-/** *** */ 	}
-/** *** */
-/** *** */
-/** *** */ 	// expose the modules object (__webpack_modules__)
-/** *** */ 	__webpack_require__.m = modules;
-/** *** */
-/** *** */ 	// expose the module cache
-/** *** */ 	__webpack_require__.c = installedModules;
-/** *** */
-/** *** */ 	// define getter function for harmony exports
-/** *** */ 	__webpack_require__.d = function(exports, name, getter) {
-/** *** */ 		if(!__webpack_require__.o(exports, name)) {
-/** *** */ 			Object.defineProperty(exports, name, {
-/** *** */ 				configurable: false,
-/** *** */ 				enumerable: true,
-/** *** */ 				get: getter
-/** *** */ 			});
-/** *** */ 		}
-/** *** */ 	};
-/** *** */
-/** *** */ 	// getDefaultExport function for compatibility with non-harmony
-			// modules
-/** *** */ 	__webpack_require__.n = function(module) {
-/** *** */ 		var getter = module && module.__esModule ?
-/** *** */ 			function getDefault() { return module['default']; } :
-/** *** */ 			function getModuleExports() { return module; };
-/** *** */ 		__webpack_require__.d(getter, 'a', getter);
-/** *** */ 		return getter;
-/** *** */ 	};
-/** *** */
-/** *** */ 	// Object.prototype.hasOwnProperty.call
-/** *** */ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/** *** */
-/** *** */ 	// __webpack_public_path__
-/** *** */ 	__webpack_require__.p = "";
-/** *** */
-/** *** */ 	// Load entry module and return exports
-/** *** */ 	return __webpack_require__(__webpack_require__.s = 2);
-/** *** */ })
-/** ********************************************************************* */
-/** *** */ ([
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ })
+/************************************************************************/
+/******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -103,12 +102,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class Generator {
 	/**
-	 * Create a new generator based on the meta object passing in
-	 * 
-	 * @constructor
-	 * @param {object}
-	 *            meta - meta object for constructing generator
-	 */
+  * Create a new generator based on the meta object passing in
+  * @constructor
+  * @param {object} meta - meta object for constructing generator
+  */
 	constructor(meta) {
 		this.type = meta.type;
 		this.name = meta.name;
@@ -120,22 +117,24 @@ class Generator {
 	}
 
 	/**
-	 * getCost computes cost exponentially based on quantity (as formula below)
-	 * xt = x0(1 + r)^t which xt is the value of x with t quantity x0 is base
-	 * value r is growth ratio (see constants.growthRatio) t is the quantity
-	 * 
-	 * @return {number} the cost of buying another generator
-	 */
+  * getCost computes cost exponentially based on quantity (as formula below)
+  * xt = x0(1 + r)^t
+  * which 
+  * xt is the value of x with t quantity
+  * x0 is base value
+  * r is growth ratio (see constants.growthRatio)
+  * t is the quantity
+  * @return {number} the cost of buying another generator
+  */
 	getCost() {
 		return parseFloat((this.baseCost * Math.pow(1 + _constants2.default.growthRatio, this.quantity)).toFixed(2));
 	}
 
 	/**
-	 * generate computes how much this type of generator generates - rate *
-	 * quantity
-	 * 
-	 * @return {number} how much this generator generates
-	 */
+  * generate computes how much this type of generator generates -
+  * rate * quantity
+  * @return {number} how much this generator generates
+  */
 	generate() {
 		return this.rate * this.quantity;
 	}
@@ -184,44 +183,91 @@ var _storyBook2 = _interopRequireDefault(_storyBook);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
- * Data flow diagram +----------------------------------------------------+ |
- * +------------------+ +------------------+ | | | | | | | ++-| Loop |<---------|
- * Generator | | || | | | | | || +------------------+ +------------------+ | ||G ^ |
- * ||a +-----------------------------+ | ||m | | ||e | | || +------------------+ | || | | | || |
- * Stories | | || | | | || +------------------+ |
- * |+----------------------------------------------------+
- * +------------------------------------------------------------+ | | | | | | | | | | | | | | | | |
- * +----------------------------------------------------+----------+ | |
- * +------------------+ +------------------+ | | | | | Mutates | | | | | |
- * Reducer |-------------------->| State | | | | | | | | | | |
- * +------------------+ +------------------+ | | |S ^ | | | |t | | | | |o | | | |
- * |r | Triggers Notifies | | | |e | | | | | | v | | | +------------------+
- * +------------------+ | | | | | | | | +-------+>| Action | | Listeners | | | | | | | | |
- * +------------------+ +------------------+ |
- * +-----------^----------------------------------------+----------+ | | | | | | | | |
- * Dispatches | | | | | +------------------+ | | | | | Views | Notifies changes | |
- * Components |<------------------------------+ | | +------------------+
- */
+ * Data flow diagram
+ +----------------------------------------------------+
+ | +------------------+          +------------------+ |
+ | |                  |          |                  | |
+++-|       Loop       |<---------|    Generator     | |
+|| |                  |          |                  | |
+|| +------------------+          +------------------+ |
+||G          ^                                        |
+||a          +-----------------------------+          |
+||m                                        |          |
+||e                                        |          |
+||                               +------------------+ |
+||                               |                  | |
+||                               |     Stories      | |
+||                               |                  | |
+||                               +------------------+ |
+|+----------------------------------------------------+
++------------------------------------------------------------+
+|                                                            |
+|                                                            |
+|                                                            |
+|                                                            |
+|                                                            |
+|                                                            |
+|                                                            |
+|                                                            |
+|       +----------------------------------------------------+----------+
+|       | +------------------+                     +------------------+ |
+|       | |                  |        Mutates      |                  | |
+|       | |     Reducer      |-------------------->|      State       | |
+|       | |                  |                     |                  | |
+|       | +------------------+                     +------------------+ |
+|       |S          ^                                        |          |
+|       |t          |                                        |          |
+|       |o          |                                        |          |
+|       |r          | Triggers                     Notifies  |          |
+|       |e          |                                        |          |
+|       |           |                                        v          |
+|       | +------------------+                     +------------------+ |
+|       | |                  |                     |                  | |
++-------+>|      Action      |                     |    Listeners     | |
+        | |                  |                     |                  | |
+        | +------------------+                     +------------------+ |
+        +-----------^----------------------------------------+----------+
+                    |                                        |
+                    |                                        |
+                    |                                        |
+                    |                                        |
+                    | Dispatches                             |
+                    |                                        |
+                    |                                        |
+          +------------------+                               |
+          |                  |                               |
+          |      Views       |              Notifies changes |
+          |    Components    |<------------------------------+
+          |                  |
+          +------------------+
+          */
 main();
 
 // main function wraps everything at top level
 function main() {
 	// TODO: fill the blank based on the theme you have choosen
+	
+	const gens = window.game.state.generators;
+	const strs = window.game.state.stories;
 	const initialState = {
 		example: 'Hello custom element',
 		counter: 0,
+		generators: gens,
+		stories: strs
 
-		generators: [{ type: 'autonomous', name: "tree", description: 'desc', rate: 1, quantity: 0, baseCost: 10, unlockValue: 10 }, { type: 'autonomous', name: "factory", description: 'desc', rate: 25, quantity: 0, baseCost: 100, unlockValue: 100 }, { type: 'autonomous', name: "storm", description: 'desc', rate: 45, quantity: 0, baseCost: 150, unlockValue: 150 }],
-
-		stories: [{ name: 'MORE_CANDY:', description: 'I need more Reese\'s Pieces! ! !', triggeredAt: 10, state: 'hidden' }, { name: 'Factory:', description: 'Reese\'s Pieces Factories have arrived! ! !', triggeredAt: 100, state: 'hidden' }, { name: 'STORM:', description: 'I smell a Reese\'s Pieces storm brewing! ! !', triggeredAt: 150, state: 'hidden' }]
+//		generators: [{ type: 'autonomous', name: "tree", description: 'desc', rate: 1, quantity: 0, baseCost: 10, unlockValue: 10 }, { type: 'autonomous', name: "factory", description: 'desc', rate: 25, quantity: 0, baseCost: 100, unlockValue: 100 }, { type: 'autonomous', name: "storm", description: 'desc', rate: 45, quantity: 0, baseCost: 150, unlockValue: 150 }],
+//
+//		stories: [{ name: 'MORE_CANDY:', description: 'I need more Reese\'s Pieces! ! !', triggeredAt: 10, state: 'hidden' }, { name: 'Factory:', description: 'Reese\'s Pieces Factories have arrived! ! !', triggeredAt: 100, state: 'hidden' }, { name: 'STORM:', description: 'I smell a Reese\'s Pieces storm brewing! ! !', triggeredAt: 150, state: 'hidden' }]
+	
 	};
+	
+
+	
+	console.log(gens);
+	console.log(strs);
+	
 
 	// initialize store
-	
-//	initialState.generators = window.game.state.generators
-//	initialState.stories = window.game.state.stories
-	
-	
 	const store = new _store2.default(_reducer2.default, initialState);
 	console.log((0, _example2.default)(store));
 
@@ -235,8 +281,7 @@ function main() {
 	// homework 1
 	window.customElements.define('game-story-book', (0, _storyBook2.default)(store));
 
-	// For ease of debugging purpose, we will expose the critical store under
-	// window
+	// For ease of debugging purpose, we will expose the critical store under window
 	// ps: window is global
 	window.store = store;
 
@@ -249,54 +294,14 @@ function main() {
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function(){/*
-																	 * 
-																	 * Copyright
-																	 * (c) 2016
-																	 * The
-																	 * Polymer
-																	 * Project
-																	 * Authors.
-																	 * All
-																	 * rights
-																	 * reserved.
-																	 * This code
-																	 * may only
-																	 * be used
-																	 * under the
-																	 * BSD style
-																	 * license
-																	 * found at
-																	 * http://polymer.github.io/LICENSE.txt
-																	 * The
-																	 * complete
-																	 * set of
-																	 * authors
-																	 * may be
-																	 * found at
-																	 * http://polymer.github.io/AUTHORS.txt
-																	 * The
-																	 * complete
-																	 * set of
-																	 * contributors
-																	 * may be
-																	 * found at
-																	 * http://polymer.github.io/CONTRIBUTORS.txt
-																	 * Code
-																	 * distributed
-																	 * by Google
-																	 * as part
-																	 * of the
-																	 * polymer
-																	 * project
-																	 * is also
-																	 * subject
-																	 * to an
-																	 * additional
-																	 * IP rights
-																	 * grant
-																	 * found at
-																	 * http://polymer.github.io/PATENTS.txt
-																	 */
+
+ Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+ This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+ The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+ Code distributed by Google as part of the polymer project is also
+ subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/
 'use strict';var p,q="undefined"!=typeof window&&window===this?this:"undefined"!=typeof global&&null!=global?global:this,da="function"==typeof Object.defineProperties?Object.defineProperty:function(a,b,c){a!=Array.prototype&&a!=Object.prototype&&(a[b]=c.value)};function ea(){ea=function(){};q.Symbol||(q.Symbol=fa)}var fa=function(){var a=0;return function(b){return"jscomp_symbol_"+(b||"")+a++}}();
 function ha(){ea();var a=q.Symbol.iterator;a||(a=q.Symbol.iterator=q.Symbol("iterator"));"function"!=typeof Array.prototype[a]&&da(Array.prototype,a,{configurable:!0,writable:!0,value:function(){return ia(this)}});ha=function(){}}function ia(a){var b=0;return ja(function(){return b<a.length?{done:!1,value:a[b++]}:{done:!0}})}function ja(a){ha();a={next:a};a[q.Symbol.iterator]=function(){return this};return a}function ka(a){ha();var b=a[Symbol.iterator];return b?b.call(a):ia(a)}
 function la(a){for(var b,c=[];!(b=a.next()).done;)c.push(b.value);return c}
@@ -320,74 +325,14 @@ function Xa(a,b,c){b.constructor===a.constructor&&c===Ja&&b.constructor.resolve=
 function u(a,b){void 0===a.g&&(a.g=2,a.f=b,Ia(Ya,a))}function Oa(a,b,c,d){var e=a.I,f=e.length;a.na=null;e[f]=b;e[f+1]=c;e[f+2]=d;0===f&&a.g&&Ia(Za,a)}function Za(a){var b=a.I,c=a.g;if(0!==b.length){for(var d,e,f=a.f,h=0;h<b.length;h+=3)d=b[h],e=b[h+c],d?Na(c,d,e,f):e(f);a.I.length=0}}function Ra(){this.error=null}var $a=new Ra;
 function Na(a,b,c,d){var e="function"===typeof c;if(e){try{var f=c(d)}catch(l){$a.error=l,f=$a}if(f===$a){var h=!0;var g=f.error;f.error=null}else var k=!0;if(b===f){u(b,new TypeError("A promises callback cannot return that same promise."));return}}else f=d,k=!0;void 0===b.g&&(e&&k?Qa(b,f):h?u(b,g):1===a?r(b,f):2===a&&u(b,f))}function ab(a,b){try{b(function(b){Qa(a,b)},function(b){u(a,b)})}catch(c){u(a,c)}}var bb=0;function Ma(a){a[La]=bb++;a.g=void 0;a.f=void 0;a.I=[]};function db(a,b){this.Ea=a;this.A=new a(Ka);this.A[La]||Ma(this.A);if(ma(b))if(this.S=this.length=b.length,this.f=Array(this.length),0===this.length)r(this.A,this.f);else{this.length=this.length||0;for(a=0;void 0===this.g&&a<b.length;a++)eb(this,b[a],a);0===this.S&&r(this.A,this.f)}else u(this.A,Error("Array Methods must be provided an Array"))}
 function eb(a,b,c){var d=a.Ea,e=d.resolve;e===Pa?(e=Ta(b),e===Ja&&void 0!==b.g?fb(a,b.g,c,b.f):"function"!==typeof e?(a.S--,a.f[c]=b):d===v?(d=new d(Ka),Xa(d,b,e),gb(a,d,c)):gb(a,new d(function(a){return a(b)}),c)):gb(a,e(b),c)}function fb(a,b,c,d){var e=a.A;void 0===e.g&&(a.S--,2===b?u(e,d):a.f[c]=d);0===a.S&&r(e,a.f)}function gb(a,b,c){Oa(b,void 0,function(b){return fb(a,1,c,b)},function(b){return fb(a,2,c,b)})};function hb(a){return(new db(this,a)).A};function ib(a){var b=this;return ma(a)?new b(function(c,d){for(var e=a.length,f=0;f<e;f++)b.resolve(a[f]).then(c,d)}):new b(function(a,b){return b(new TypeError("You must pass an array to race."))})};function jb(a){var b=new this(Ka);u(b,a);return b};function v(a){this[La]=bb++;this.f=this.g=void 0;this.I=[];if(Ka!==a){if("function"!==typeof a)throw new TypeError("You must pass a resolver function as the first argument to the promise constructor");if(this instanceof v)ab(this,a);else throw new TypeError("Failed to construct 'Promise': Please use the 'new' operator, this object constructor cannot be called as a function.");}}v.prototype={constructor:v,then:Ja,a:function(a){return this.then(null,a)}};/*
-																																																																																																																																																																																																																																																																																																				 * 
-																																																																																																																																																																																																																																																																																																				 * Copyright
-																																																																																																																																																																																																																																																																																																				 * (c)
-																																																																																																																																																																																																																																																																																																				 * 2017
-																																																																																																																																																																																																																																																																																																				 * The
-																																																																																																																																																																																																																																																																																																				 * Polymer
-																																																																																																																																																																																																																																																																																																				 * Project
-																																																																																																																																																																																																																																																																																																				 * Authors.
-																																																																																																																																																																																																																																																																																																				 * All
-																																																																																																																																																																																																																																																																																																				 * rights
-																																																																																																																																																																																																																																																																																																				 * reserved.
-																																																																																																																																																																																																																																																																																																				 * This
-																																																																																																																																																																																																																																																																																																				 * code
-																																																																																																																																																																																																																																																																																																				 * may
-																																																																																																																																																																																																																																																																																																				 * only
-																																																																																																																																																																																																																																																																																																				 * be
-																																																																																																																																																																																																																																																																																																				 * used
-																																																																																																																																																																																																																																																																																																				 * under
-																																																																																																																																																																																																																																																																																																				 * the
-																																																																																																																																																																																																																																																																																																				 * BSD
-																																																																																																																																																																																																																																																																																																				 * style
-																																																																																																																																																																																																																																																																																																				 * license
-																																																																																																																																																																																																																																																																																																				 * found
-																																																																																																																																																																																																																																																																																																				 * at
-																																																																																																																																																																																																																																																																																																				 * http://polymer.github.io/LICENSE.txt
-																																																																																																																																																																																																																																																																																																				 * The
-																																																																																																																																																																																																																																																																																																				 * complete
-																																																																																																																																																																																																																																																																																																				 * set
-																																																																																																																																																																																																																																																																																																				 * of
-																																																																																																																																																																																																																																																																																																				 * authors
-																																																																																																																																																																																																																																																																																																				 * may
-																																																																																																																																																																																																																																																																																																				 * be
-																																																																																																																																																																																																																																																																																																				 * found
-																																																																																																																																																																																																																																																																																																				 * at
-																																																																																																																																																																																																																																																																																																				 * http://polymer.github.io/AUTHORS.txt
-																																																																																																																																																																																																																																																																																																				 * The
-																																																																																																																																																																																																																																																																																																				 * complete
-																																																																																																																																																																																																																																																																																																				 * set
-																																																																																																																																																																																																																																																																																																				 * of
-																																																																																																																																																																																																																																																																																																				 * contributors
-																																																																																																																																																																																																																																																																																																				 * may
-																																																																																																																																																																																																																																																																																																				 * be
-																																																																																																																																																																																																																																																																																																				 * found
-																																																																																																																																																																																																																																																																																																				 * at
-																																																																																																																																																																																																																																																																																																				 * http://polymer.github.io/CONTRIBUTORS.txt
-																																																																																																																																																																																																																																																																																																				 * Code
-																																																																																																																																																																																																																																																																																																				 * distributed
-																																																																																																																																																																																																																																																																																																				 * by
-																																																																																																																																																																																																																																																																																																				 * Google
-																																																																																																																																																																																																																																																																																																				 * as
-																																																																																																																																																																																																																																																																																																				 * part
-																																																																																																																																																																																																																																																																																																				 * of
-																																																																																																																																																																																																																																																																																																				 * the
-																																																																																																																																																																																																																																																																																																				 * polymer
-																																																																																																																																																																																																																																																																																																				 * project
-																																																																																																																																																																																																																																																																																																				 * is
-																																																																																																																																																																																																																																																																																																				 * also
-																																																																																																																																																																																																																																																																																																				 * subject
-																																																																																																																																																																																																																																																																																																				 * to
-																																																																																																																																																																																																																																																																																																				 * an
-																																																																																																																																																																																																																																																																																																				 * additional
-																																																																																																																																																																																																																																																																																																				 * IP
-																																																																																																																																																																																																																																																																																																				 * rights
-																																																																																																																																																																																																																																																																																																				 * grant
-																																																																																																																																																																																																																																																																																																				 * found
-																																																																																																																																																																																																																																																																																																				 * at
-																																																																																																																																																																																																																																																																																																				 * http://polymer.github.io/PATENTS.txt
-																																																																																																																																																																																																																																																																																																				 */
+
+Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/
 window.Promise||(window.Promise=v,v.prototype["catch"]=v.prototype.a,v.prototype.then=v.prototype.then,v.all=hb,v.race=ib,v.resolve=Pa,v.reject=jb);(function(a){function b(a,b){if("function"===typeof window.CustomEvent)return new CustomEvent(a,b);var c=document.createEvent("CustomEvent");c.initCustomEvent(a,!!b.bubbles,!!b.cancelable,b.detail);return c}function c(a){if(m)return a.ownerDocument!==document?a.ownerDocument:null;var b=a.__importDoc;if(!b&&a.parentNode){b=a.parentNode;if("function"===typeof b.closest)b=b.closest("link[rel=import]");else for(;!g(b)&&(b=b.parentNode););a.__importDoc=b}return b}function d(a){var b=document.querySelectorAll("link[rel=import]:not([import-dependency])"),
 c=b.length;c?l(b,function(b){return h(b,function(){0===--c&&a()})}):a()}function e(a){function b(){"loading"!==document.readyState&&document.body&&(document.removeEventListener("readystatechange",b),a())}document.addEventListener("readystatechange",b);b()}function f(a){e(function(){return d(function(){return a&&a()})})}function h(a,b){if(a.__loaded)b&&b();else if("script"===a.localName&&!a.src||"style"===a.localName&&!a.firstChild)a.__loaded=!0,b&&b();else{var c=function(d){a.removeEventListener(d.type,
 c);a.__loaded=!0;b&&b()};a.addEventListener("load",c);Z&&"style"===a.localName||a.addEventListener("error",c)}}function g(a){return a.nodeType===Node.ELEMENT_NODE&&"link"===a.localName&&"import"===a.rel}function k(){var a=this;this.a={};this.b=0;this.c=new MutationObserver(function(b){return a.Ra(b)});this.c.observe(document.head,{childList:!0,subtree:!0});this.loadImports(document)}function l(a,b,c){var d=a?a.length:0,e=c?-1:1;for(c=c?d-1:0;c<d&&0<=c;c+=e)b(a[c],c)}var m="import"in document.createElement("link"),
@@ -404,144 +349,24 @@ document.createElement(b.localName);f.__appliedElement=b;f.setAttribute("type","
 "load":"error",{bubbles:!1,cancelable:!1,detail:void 0})))};k.prototype.Ra=function(a){var b=this;l(a,function(a){return l(a.addedNodes,function(a){a&&a.nodeType===Node.ELEMENT_NODE&&(g(a)?b.s(a):b.loadImports(a))})})};var aa=null;if(m){var ba=document.querySelectorAll("link[rel=import]");l(ba,function(a){a.import&&"loading"===a.import.readyState||(a.__loaded=!0)});ba=function(a){a=a.target;g(a)&&(a.__loaded=!0)};document.addEventListener("load",ba,!0);document.addEventListener("error",ba,!0)}else{var R=
 Object.getOwnPropertyDescriptor(Node.prototype,"baseURI");Object.defineProperty((!R||R.configurable?Node:Element).prototype,"baseURI",{get:function(){var a=g(this)?this:c(this);return a?a.href:R&&R.get?R.get.call(this):(document.querySelector("base")||window.location).href},configurable:!0,enumerable:!0});Object.defineProperty(HTMLLinkElement.prototype,"import",{get:function(){return this.__import||null},configurable:!0,enumerable:!0});e(function(){aa=new k})}f(function(){return document.dispatchEvent(b("HTMLImportsLoaded",
 {cancelable:!0,bubbles:!0,detail:void 0}))});a.useNative=m;a.whenReady=f;a.importForElement=c;a.loadImports=function(a){aa&&aa.loadImports(a)}})(window.HTMLImports=window.HTMLImports||{});/*
-																																															 * 
-																																															 * Copyright
-																																															 * (c)
-																																															 * 2014
-																																															 * The
-																																															 * Polymer
-																																															 * Project
-																																															 * Authors.
-																																															 * All
-																																															 * rights
-																																															 * reserved.
-																																															 * This
-																																															 * code
-																																															 * may
-																																															 * only
-																																															 * be
-																																															 * used
-																																															 * under
-																																															 * the
-																																															 * BSD
-																																															 * style
-																																															 * license
-																																															 * found
-																																															 * at
-																																															 * http://polymer.github.io/LICENSE.txt
-																																															 * The
-																																															 * complete
-																																															 * set
-																																															 * of
-																																															 * authors
-																																															 * may
-																																															 * be
-																																															 * found
-																																															 * at
-																																															 * http://polymer.github.io/AUTHORS.txt
-																																															 * The
-																																															 * complete
-																																															 * set
-																																															 * of
-																																															 * contributors
-																																															 * may
-																																															 * be
-																																															 * found
-																																															 * at
-																																															 * http://polymer.github.io/CONTRIBUTORS.txt
-																																															 * Code
-																																															 * distributed
-																																															 * by
-																																															 * Google
-																																															 * as
-																																															 * part
-																																															 * of
-																																															 * the
-																																															 * polymer
-																																															 * project
-																																															 * is
-																																															 * also
-																																															 * subject
-																																															 * to
-																																															 * an
-																																															 * additional
-																																															 * IP
-																																															 * rights
-																																															 * grant
-																																															 * found
-																																															 * at
-																																															 * http://polymer.github.io/PATENTS.txt
-																																															 */
+
+ Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+ This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+ The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+ Code distributed by Google as part of the polymer project is also
+ subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/
 window.WebComponents=window.WebComponents||{flags:{}};var kb=document.querySelector('script[src*="webcomponents-lite.js"]'),lb=/wc-(.+)/,x={};if(!x.noOpts){location.search.slice(1).split("&").forEach(function(a){a=a.split("=");var b;a[0]&&(b=a[0].match(lb))&&(x[b[1]]=a[1]||!0)});if(kb)for(var mb=0,nb;nb=kb.attributes[mb];mb++)"src"!==nb.name&&(x[nb.name]=nb.value||!0);if(x.log&&x.log.split){var ob=x.log.split(",");x.log={};ob.forEach(function(a){x.log[a]=!0})}else x.log={}}
 window.WebComponents.flags=x;var pb=x.shadydom;pb&&(window.ShadyDOM=window.ShadyDOM||{},window.ShadyDOM.force=pb);var qb=x.register||x.ce;qb&&window.customElements&&(window.customElements.forcePolyfill=qb);/*
-																																																				 * 
-																																																				 * Copyright
-																																																				 * (c)
-																																																				 * 2016
-																																																				 * The
-																																																				 * Polymer
-																																																				 * Project
-																																																				 * Authors.
-																																																				 * All
-																																																				 * rights
-																																																				 * reserved.
-																																																				 * This
-																																																				 * code
-																																																				 * may
-																																																				 * only
-																																																				 * be
-																																																				 * used
-																																																				 * under
-																																																				 * the
-																																																				 * BSD
-																																																				 * style
-																																																				 * license
-																																																				 * found
-																																																				 * at
-																																																				 * http://polymer.github.io/LICENSE.txt
-																																																				 * The
-																																																				 * complete
-																																																				 * set
-																																																				 * of
-																																																				 * authors
-																																																				 * may
-																																																				 * be
-																																																				 * found
-																																																				 * at
-																																																				 * http://polymer.github.io/AUTHORS.txt
-																																																				 * The
-																																																				 * complete
-																																																				 * set
-																																																				 * of
-																																																				 * contributors
-																																																				 * may
-																																																				 * be
-																																																				 * found
-																																																				 * at
-																																																				 * http://polymer.github.io/CONTRIBUTORS.txt
-																																																				 * Code
-																																																				 * distributed
-																																																				 * by
-																																																				 * Google
-																																																				 * as
-																																																				 * part
-																																																				 * of
-																																																				 * the
-																																																				 * polymer
-																																																				 * project
-																																																				 * is
-																																																				 * also
-																																																				 * subject
-																																																				 * to
-																																																				 * an
-																																																				 * additional
-																																																				 * IP
-																																																				 * rights
-																																																				 * grant
-																																																				 * found
-																																																				 * at
-																																																				 * http://polymer.github.io/PATENTS.txt
-																																																				 */
+
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/
 var y=window.ShadyDOM||{};y.Na=!(!Element.prototype.attachShadow||!Node.prototype.getRootNode);var rb=Object.getOwnPropertyDescriptor(Node.prototype,"firstChild");y.M=!!(rb&&rb.configurable&&rb.get);y.sa=y.force||!y.Na;function sb(a){return a.__shady&&void 0!==a.__shady.firstChild}function z(a){return"ShadyRoot"===a.ya}function tb(a){a=a.getRootNode();if(z(a))return a}var ub=Element.prototype,vb=ub.matches||ub.matchesSelector||ub.mozMatchesSelector||ub.msMatchesSelector||ub.oMatchesSelector||ub.webkitMatchesSelector;
 function wb(a,b){if(a&&b)for(var c=Object.getOwnPropertyNames(b),d=0,e;d<c.length&&(e=c[d]);d++){var f=Object.getOwnPropertyDescriptor(b,e);f&&Object.defineProperty(a,e,f)}}function xb(a,b){for(var c=[],d=1;d<arguments.length;++d)c[d-1]=arguments[d];for(d=0;d<c.length;d++)wb(a,c[d]);return a}function yb(a,b){for(var c in b)a[c]=b[c]}var zb=document.createTextNode(""),Ab=0,Bb=[];(new MutationObserver(function(){for(;Bb.length;)try{Bb.shift()()}catch(a){throw zb.textContent=Ab++,a;}})).observe(zb,{characterData:!0});
 function Cb(a){Bb.push(a);zb.textContent=Ab++}var Db=!!document.contains;function Eb(a,b){for(;b;){if(b==a)return!0;b=b.parentNode}return!1};var Fb=[],Gb;function Hb(a){Gb||(Gb=!0,Cb(Ib));Fb.push(a)}function Ib(){Gb=!1;for(var a=!!Fb.length;Fb.length;)Fb.shift()();return a}Ib.list=Fb;function Jb(){this.a=!1;this.addedNodes=[];this.removedNodes=[];this.V=new Set}function Kb(a){a.a||(a.a=!0,Cb(function(){Lb(a)}))}function Lb(a){if(a.a){a.a=!1;var b=a.takeRecords();b.length&&a.V.forEach(function(a){a(b)})}}Jb.prototype.takeRecords=function(){if(this.addedNodes.length||this.removedNodes.length){var a=[{addedNodes:this.addedNodes,removedNodes:this.removedNodes}];this.addedNodes=[];this.removedNodes=[];return a}return[]};
@@ -664,7 +489,7 @@ X.prototype.flushCustomStyles=X.prototype.F;Object.defineProperties(X.prototype,
 Cg&&(window.ShadyCSS.CustomStyleInterface=Cg);var Dg=window.customElements,Eg=window.HTMLImports,Fg=window.HTMLTemplateElement;window.WebComponents=window.WebComponents||{};if(Dg&&Dg.polyfillWrapFlushCallback){var Gg,Hg=function(){if(Gg){Fg.J&&Fg.J(window.document);var a=Gg;Gg=null;a();return!0}},Ig=Eg.whenReady;Dg.polyfillWrapFlushCallback(function(a){Gg=a;Ig(Hg)});Eg.whenReady=function(a){Ig(function(){Hg()?Eg.whenReady(a):a()})}}
 Eg.whenReady(function(){requestAnimationFrame(function(){window.WebComponents.ready=!0;document.dispatchEvent(new CustomEvent("WebComponentsReady",{bubbles:!0}))})});var Jg=document.createElement("style");Jg.textContent="body {transition: opacity ease-in 0.2s; } \nbody[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } \n";var Kg=document.querySelector("head");Kg.insertBefore(Jg,Kg.firstChild);}).call(this);
 
-// # sourceMappingURL=webcomponents-lite.js.map
+//# sourceMappingURL=webcomponents-lite.js.map
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(5)))
 
@@ -703,8 +528,8 @@ module.exports = g;
 var process = module.exports = {};
 
 // cached from whatever global is present so that test runners that stub it
-// don't break things. But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals. It's inside a
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
 // function because try/catches deoptimize in certain engines.
 
 var cachedSetTimeout;
@@ -738,7 +563,7 @@ function defaultClearTimeout () {
 } ())
 function runTimeout(fun) {
     if (cachedSetTimeout === setTimeout) {
-        // normal enviroments in sane situations
+        //normal enviroments in sane situations
         return setTimeout(fun, 0);
     }
     // if setTimeout wasn't available but was latter defined
@@ -751,13 +576,10 @@ function runTimeout(fun) {
         return cachedSetTimeout(fun, 0);
     } catch(e){
         try {
-            // When we are in I.E. but the script has been evaled so I.E.
-			// doesn't trust the global object when called normally
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
             return cachedSetTimeout.call(null, fun, 0);
         } catch(e){
-            // same as above but when it's a version of I.E. that must have the
-			// global object for 'this', hopfully our context correct otherwise
-			// it will throw a global error
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
             return cachedSetTimeout.call(this, fun, 0);
         }
     }
@@ -766,7 +588,7 @@ function runTimeout(fun) {
 }
 function runClearTimeout(marker) {
     if (cachedClearTimeout === clearTimeout) {
-        // normal enviroments in sane situations
+        //normal enviroments in sane situations
         return clearTimeout(marker);
     }
     // if clearTimeout wasn't available but was latter defined
@@ -779,15 +601,11 @@ function runClearTimeout(marker) {
         return cachedClearTimeout(marker);
     } catch (e){
         try {
-            // When we are in I.E. but the script has been evaled so I.E.
-			// doesn't trust the global object when called normally
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
             return cachedClearTimeout.call(null, marker);
         } catch (e){
-            // same as above but when it's a version of I.E. that must have the
-			// global object for 'this', hopfully our context correct otherwise
-			// it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs
-			// setTimeout
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
             return cachedClearTimeout.call(this, marker);
         }
     }
@@ -949,22 +767,17 @@ function loop(store) {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-// Store is heavily inspired by Redux from React pattern to handle state
-// management
+// Store is heavily inspired by Redux from React pattern to handle state management
 class Store {
 	/**
-	 * Create a new store with specific reducer and optionally initial state
-	 * 
-	 * @constructor
-	 * @param {function}
-	 *            reducer - the reducer to mutate state
-	 * @param {initialState}
-	 *            object - the initial state
-	 */
+  * Create a new store with specific reducer and optionally initial state
+  * @constructor
+  * @param {function} reducer - the reducer to mutate state
+  * @param {initialState} object - the initial state
+  */
 	constructor(reducer, initialState = {}) {
 		this.reducer = reducer;
-		// listeners are internal state to keep track of which reducers to call
-		// in this
+		// listeners are internal state to keep track of which reducers to call in this
 		// order
 		this.listeners = [];
 		// initial internal state
@@ -972,53 +785,44 @@ class Store {
 	}
 
 	/**
-	 * Overwrites getter for `state` variable to be READ-ONLY state through
-	 * deepCopy method
-	 */
+  * Overwrites getter for `state` variable to be READ-ONLY state through
+  * deepCopy method
+  */
 	get state() {
 		return deepCopy(this.__state);
 	}
 
 	/**
-	 * `dispatch` controls state changes. One should use only dispatch to show
-	 * intent to change state and go through reducer to change so
-	 * 
-	 * @param {object}
-	 *            action - action should contain both `type` and `payload`
-	 */
+  * `dispatch` controls state changes. One should use only dispatch to show
+  * intent to change state and go through reducer to change so
+  * @param {object} action - action should contain both `type` and `payload`
+  */
 	dispatch(action) {
 		this.__state = this.reducer(this.state, action);
 		this.listeners.forEach(l => l(this.state, action));
 	}
 
 	/**
-	 * subscribe allows consumer to listen for state changes
-	 * 
-	 * @param {function}
-	 *            listener - function contains state and action as its arguments
-	 */
+  * subscribe allows consumer to listen for state changes
+  * @param {function} listener - function contains state and action as its arguments
+  */
 	subscribe(listener) {
 		this.listeners.push(listener);
 	}
 
 	/**
-	 * unsubscribe allows consumer to stop listening to state changes
-	 * 
-	 * @param {function}
-	 *            listener - the function consumer subscribed earlier
-	 */
+  * unsubscribe allows consumer to stop listening to state changes
+  * @param {function} listener - the function consumer subscribed earlier
+  */
 	unsubscribe(listener) {
 		this.listeners = this.listeners.filter(l => l != listener);
 	}
 }
 
 exports.default = Store; /**
-							 * deepCopy is helper method to create deep copy of
-							 * certain object
-							 * 
-							 * @param {object}
-							 *            obj - the object to copy from
-							 */
+                          * deepCopy is helper method to create deep copy of certain object
+                          * @param {object} obj - the object to copy from
+                          */
 
 function deepCopy(obj) {
 	return JSON.parse(JSON.stringify(obj));
@@ -1104,12 +908,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 class Story {
 	/**
-	 * create a new story based on the meta passed in argument
-	 * 
-	 * @constructor
-	 * @param {object}
-	 *            meta - the meta data for story
-	 */
+  * create a new story based on the meta passed in argument
+  * @constructor
+  * @param {object} meta - the meta data for story
+  */
 	constructor(meta) {
 		this.name = meta.name;
 		this.description = meta.description;
@@ -1118,12 +920,10 @@ class Story {
 	}
 
 	/**
-	 * isUnlockYet checks if this story is ready to be unlocked yet
-	 * 
-	 * @param {number}
-	 *            value - the resource value at the moment
-	 * @return {boolean} if this story is unlockable
-	 */
+  * isUnlockYet checks if this story is ready to be unlocked yet
+  * @param {number} value - the resource value at the moment
+  * @return {boolean} if this story is unlockable
+  */
 	isUnlockYet(value) {
 		if (value >= this.triggeredAt) {
 			return true;
@@ -1132,8 +932,8 @@ class Story {
 	}
 
 	/**
-	 * unlock simply unlock the story to visible state
-	 */
+  * unlock simply unlock the story to visible state
+  */
 	unlock() {
 		this.state = 'visible';
 	}
@@ -1198,7 +998,7 @@ exports.default = function (store) {
 		}
 
 		handleStateChange(newState) {
-			// console.log('CounterComponent#stateChange', this, newState);
+			//console.log('CounterComponent#stateChange', this, newState);
 			this.querySelector('#count').textContent = newState.counter;
 		}
 
@@ -1357,7 +1157,7 @@ exports.default = function (store) {
 		constructor() {
 			super();
 			this.store = store;
-			// this.innerHTML = this.render();
+			//this.innerHTML = this.render();
 			this.onStateChange = this.handleStateChange.bind(this);
 		}
 
@@ -1405,5 +1205,5 @@ exports.default = function (store) {
 };
 
 /***/ })
-/** *** */ ]);
-// # sourceMappingURL=app.bundle.js.map
+/******/ ]);
+//# sourceMappingURL=app.bundle.js.map
