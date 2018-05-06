@@ -19,7 +19,7 @@ public class GeneratorsDAOImpl implements GeneratorsDAO {
 	// TODO: fill the Strings with the SQL queries as "prepated statements" and
 	// use these queries variable accordingly in the method below
 	protected static final String getAllQuery = "SELECT * FROM generators;";
-	protected static final String getByIdQuery = "";
+	protected static final String getByIdQuery = "SELECT * FROM generators where id = ?;";
 	protected static final String setQuery = "";
 	protected static final String addQuery = "";
 	protected static final String removeQuery = "";
@@ -55,6 +55,26 @@ public class GeneratorsDAOImpl implements GeneratorsDAO {
 	@Override
 	public Optional<Generator> getById(int id) {
 		// TODO: get specific generator by id
+
+		try (Connection c = this.context.getConnection(); PreparedStatement ps = c.prepareStatement(getByIdQuery)) {
+
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				int identification = rs.getInt(1);
+				String name = rs.getString(2);
+				String description = rs.getString(3);
+				int rate = rs.getInt(4);
+				int baseCost = rs.getInt(5);
+				int unlockAt = rs.getInt(6);
+				Generator gen = new Generator(identification, name, description, rate, baseCost, unlockAt);
+				return Optional.of(gen);
+			}
+
+		} catch (SQLException e) {
+
+		}
 		return Optional.empty();
 	}
 
