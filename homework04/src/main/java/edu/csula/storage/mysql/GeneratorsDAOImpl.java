@@ -20,9 +20,9 @@ public class GeneratorsDAOImpl implements GeneratorsDAO {
 	// use these queries variable accordingly in the method below
 	protected static final String getAllQuery = "SELECT * FROM generators;";
 	protected static final String getByIdQuery = "SELECT * FROM generators where id = ?;";
-	protected static final String setQuery = "UPDATE generators name = ?, description = ?, rate = ?, base_cost = ?, unlock_at = ? where id = ?;";
-	protected static final String addQuery = "INSET INTO generators values(null,?,?,?,?,?, null);";
-	protected static final String removeQuery = "DELETE FROM generators where id - ?;";
+	protected static final String setQuery = "UPDATE generators SET name = ?, description = ?, rate = ?, base_cost = ?, unlock_at = ? where id = ?;";
+	protected static final String addQuery = "INSERT INTO generators values(null,?,?,?,?,?, null);";
+	protected static final String removeQuery = "DELETE FROM generators where id = ?;";
 
 	public GeneratorsDAOImpl(Database context) {
 		this.context = context;

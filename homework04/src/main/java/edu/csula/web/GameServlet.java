@@ -16,7 +16,7 @@ import edu.csula.storage.EventsDAO;
 import edu.csula.storage.GeneratorsDAO;
 import edu.csula.storage.mysql.Database;
 import edu.csula.storage.mysql.EventsDAOImpl;
-import edu.csula.storage.servlet.GeneratorsDAOImpl;
+import edu.csula.storage.mysql.GeneratorsDAOImpl;
 
 @WebServlet("/game")
 public class GameServlet extends HttpServlet {
@@ -31,7 +31,7 @@ public class GameServlet extends HttpServlet {
 
 		
 		EventsDAO eventsDAO = new EventsDAOImpl(new Database());
-		GeneratorsDAO genDAO = new GeneratorsDAOImpl(getServletContext());
+		GeneratorsDAO genDAO = new GeneratorsDAOImpl(new Database());
 		GameState gameState = new GameState(genDAO.getAll(), eventsDAO.getAll());
 
 		String json = gson.toJson(gameState);

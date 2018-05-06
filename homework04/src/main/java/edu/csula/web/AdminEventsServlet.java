@@ -28,7 +28,6 @@ public class AdminEventsServlet extends HttpServlet {
 
 		EventsDAO dao = new EventsDAOImpl(new Database());
 
-		System.out.println(dao.getAll().size());
 		request.setAttribute("events", dao.getAll());
 		request.getRequestDispatcher("/WEB-INF/admin-events.jsp").forward(request, response);
 	}

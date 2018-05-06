@@ -1,13 +1,15 @@
 package edu.csula.web;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.csula.storage.servlet.GeneratorsDAOImpl;
+import edu.csula.storage.mysql.Database;
+import edu.csula.storage.mysql.GeneratorsDAOImpl;
 
 /**
  * Servlet implementation class DeleteGenerator
@@ -19,7 +21,7 @@ public class DeleteGenerator extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		GeneratorsDAOImpl gdi = new GeneratorsDAOImpl(getServletContext());
+		GeneratorsDAOImpl gdi = new GeneratorsDAOImpl(new Database());
 		gdi.remove(id);
 		response.sendRedirect("generators");
 
