@@ -20,7 +20,7 @@ public class GeneratorsDAOImpl implements GeneratorsDAO {
 	// use these queries variable accordingly in the method below
 	protected static final String getAllQuery = "SELECT * FROM generators;";
 	protected static final String getByIdQuery = "SELECT * FROM generators where id = ?;";
-	protected static final String setQuery = "";
+	protected static final String setQuery = "UPDATE generators name = ?, description = ?, rate = ?, base_cost = ?, unlock_at = ? where id = ?;";
 	protected static final String addQuery = "";
 	protected static final String removeQuery = "";
 
@@ -81,6 +81,18 @@ public class GeneratorsDAOImpl implements GeneratorsDAO {
 	@Override
 	public void set(int id, Generator generator) {
 		// TODO: update specific generator by id
+		try(Connection c = this.context.getConnection(); PreparedStatement ps = c.prepareStatement(setQuery)){
+			
+			ps.setString(1, generator.getName());
+			ps.setString(2, generator.getDescription());
+			ps.setInt(3, generator.getRate());
+			ps.setInt(4, generator.getBaseCost());
+			ps.setInt(5, generator.getUnlockAt());
+			ps.setInt(6,id);
+			ps.executeUpdate();
+		}catch(SQLException e) {
+			
+		}
 	}
 
 	@Override
