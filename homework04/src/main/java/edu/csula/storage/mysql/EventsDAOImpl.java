@@ -43,7 +43,6 @@ public class EventsDAOImpl implements EventsDAO {
 				String desc = rs.getString(3);
 				int trigger = rs.getInt(4);
 				Event event = new Event(id, name, desc, trigger);
-				System.out.println(name);
 				events.add(event);
 			}
 		} catch (SQLException e) {

@@ -21,8 +21,8 @@ public class GeneratorsDAOImpl implements GeneratorsDAO {
 	protected static final String getAllQuery = "SELECT * FROM generators;";
 	protected static final String getByIdQuery = "SELECT * FROM generators where id = ?;";
 	protected static final String setQuery = "UPDATE generators name = ?, description = ?, rate = ?, base_cost = ?, unlock_at = ? where id = ?;";
-	protected static final String addQuery = "INSET INTO generators values(null,?,?,?,?,?, null)";
-	protected static final String removeQuery = "";
+	protected static final String addQuery = "INSET INTO generators values(null,?,?,?,?,?, null);";
+	protected static final String removeQuery = "DELETE FROM generators where id - ?;";
 
 	public GeneratorsDAOImpl(Database context) {
 		this.context = context;
@@ -113,5 +113,12 @@ public class GeneratorsDAOImpl implements GeneratorsDAO {
 	@Override
 	public void remove(int id) {
 		// TODO: implement jdbc logic to remove generator by id
+		try(Connection c = this.context.getConnection(); PreparedStatement ps = c.prepareStatement(removeQuery)){
+			ps.setInt(1, id);
+			ps.executeUpdate();
+		}catch(SQLException e) {
+			
+		}
 	}
+
 }
