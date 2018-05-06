@@ -18,8 +18,6 @@ import edu.csula.storage.servlet.UsersDAOImpl;
 public class AdminEventsServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
-	
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,9 +25,9 @@ public class AdminEventsServlet extends HttpServlet {
 		if (!udi.getAuthenticatedUser().isPresent()) {
 			response.sendRedirect("auth");
 		}
-		
+
 		EventsDAO dao = new EventsDAOImpl(new Database());
-		
+
 		System.out.println(dao.getAll().size());
 		request.setAttribute("events", dao.getAll());
 		request.getRequestDispatcher("/WEB-INF/admin-events.jsp").forward(request, response);
@@ -37,11 +35,11 @@ public class AdminEventsServlet extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		EventsDAOImpl dao = new EventsDAOImpl(getServletContext());
-//		String name = request.getParameter("name");
-//		String description = request.getParameter("descTextArea");
-//		int trigger = Integer.parseInt(request.getParameter("triggerInput"));
-//		dao.add(new Event(dao.getAll().size() + 1, name, description, trigger));
-//		response.sendRedirect("events");
+		EventsDAO dao = new EventsDAOImpl(new Database());
+		String name = request.getParameter("name");
+		String description = request.getParameter("descTextArea");
+		int trigger = Integer.parseInt(request.getParameter("triggerInput"));
+		dao.add(new Event(dao.getAll().size() + 1, name, description, trigger));
+		response.sendRedirect("events");
 	}
 }

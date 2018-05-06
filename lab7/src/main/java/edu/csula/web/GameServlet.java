@@ -1,8 +1,6 @@
 package edu.csula.web;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,10 +12,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import edu.csula.models.GameState;
-import edu.csula.models.Generator;
 import edu.csula.storage.EventsDAO;
 import edu.csula.storage.GeneratorsDAO;
-import edu.csula.storage.servlet.EventsDAOImpl;
+import edu.csula.storage.mysql.Database;
+import edu.csula.storage.mysql.EventsDAOImpl;
 import edu.csula.storage.servlet.GeneratorsDAOImpl;
 
 @WebServlet("/game")
@@ -31,7 +29,8 @@ public class GameServlet extends HttpServlet {
 		GsonBuilder builder = new GsonBuilder();
 		Gson gson = builder.create();
 
-		EventsDAO eventsDAO = new EventsDAOImpl(getServletContext());
+		
+		EventsDAO eventsDAO = new EventsDAOImpl(new Database());
 		GeneratorsDAO genDAO = new GeneratorsDAOImpl(getServletContext());
 		GameState gameState = new GameState(genDAO.getAll(), eventsDAO.getAll());
 

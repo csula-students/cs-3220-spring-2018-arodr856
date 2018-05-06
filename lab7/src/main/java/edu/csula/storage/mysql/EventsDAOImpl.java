@@ -21,7 +21,7 @@ public class EventsDAOImpl implements EventsDAO {
 	// use these queries variable accordingly in the method below
 	protected static final String getAllQuery = "SELECT * FROM events;";
 	protected static final String getByIdQuery = "SELECT * FROM events where id= ?";
-	protected static final String setQuery = "UPDATE events SET name = ? , description = ?, trigger_at = ?";
+	protected static final String setQuery = "UPDATE events SET name = ? , description = ?, trigger_at = ? where id = ?";
 	protected static final String addQuery = "INSERT into events values(null, ?,?,?,null)";
 	protected static final String removeQuery = "DELETE FROM events where id = ?";
 
@@ -57,7 +57,6 @@ public class EventsDAOImpl implements EventsDAO {
 	@Override
 	public Optional<Event> getById(int id) {
 		try (Connection c = context.getConnection(); PreparedStatement ps = c.prepareStatement(getByIdQuery)) {
-			
 
 			ps.setInt(1, id);
 
@@ -86,6 +85,7 @@ public class EventsDAOImpl implements EventsDAO {
 			ps.setString(1, event.getName());
 			ps.setString(2, event.getDescription());
 			ps.setInt(3, event.getTriggerAt());
+			ps.setInt(4, id);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 
@@ -109,12 +109,12 @@ public class EventsDAOImpl implements EventsDAO {
 	@Override
 	public void remove(int id) {
 		// TODO: implement jdbc logic to remove event by id
-		try(Connection c = context.getConnection(); PreparedStatement ps = c.prepareStatement(removeQuery)){
+		try (Connection c = context.getConnection(); PreparedStatement ps = c.prepareStatement(removeQuery)) {
 			ps.setInt(1, id);
 			ps.executeUpdate();
-		}catch(SQLException e) {
-			
+		} catch (SQLException e) {
+
 		}
 	}
-	
+
 }
