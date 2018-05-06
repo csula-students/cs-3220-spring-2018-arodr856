@@ -21,7 +21,7 @@ public class GeneratorsDAOImpl implements GeneratorsDAO {
 	protected static final String getAllQuery = "SELECT * FROM generators;";
 	protected static final String getByIdQuery = "SELECT * FROM generators where id = ?;";
 	protected static final String setQuery = "UPDATE generators name = ?, description = ?, rate = ?, base_cost = ?, unlock_at = ? where id = ?;";
-	protected static final String addQuery = "";
+	protected static final String addQuery = "INSET INTO generators values(null,?,?,?,?,?, null)";
 	protected static final String removeQuery = "";
 
 	public GeneratorsDAOImpl(Database context) {
@@ -81,23 +81,33 @@ public class GeneratorsDAOImpl implements GeneratorsDAO {
 	@Override
 	public void set(int id, Generator generator) {
 		// TODO: update specific generator by id
-		try(Connection c = this.context.getConnection(); PreparedStatement ps = c.prepareStatement(setQuery)){
-			
+		try (Connection c = this.context.getConnection(); PreparedStatement ps = c.prepareStatement(setQuery)) {
+
 			ps.setString(1, generator.getName());
 			ps.setString(2, generator.getDescription());
 			ps.setInt(3, generator.getRate());
 			ps.setInt(4, generator.getBaseCost());
 			ps.setInt(5, generator.getUnlockAt());
-			ps.setInt(6,id);
+			ps.setInt(6, id);
 			ps.executeUpdate();
-		}catch(SQLException e) {
-			
+		} catch (SQLException e) {
+
 		}
 	}
 
 	@Override
 	public void add(Generator generator) {
 		// TODO: implement jdbc logic to add a new generator
+		try(Connection c = this.context.getConnection(); PreparedStatement ps = c.prepareStatement(addQuery)){
+			ps.setString(1, generator.getName());
+			ps.setString(2, generator.getDescription());
+			ps.setInt(3, generator.getRate());
+			ps.setInt(4, generator.getBaseCost());
+			ps.setInt(5, generator.getUnlockAt());
+			ps.executeUpdate();
+		}catch(SQLException e) {
+			
+		}
 	}
 
 	@Override
