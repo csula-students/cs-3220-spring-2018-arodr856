@@ -6,6 +6,8 @@ public class Event {
 	private final String description;
 	private final int triggerAt;
 
+	
+	
 	public Event(int id, String name, String description, int triggerAt) {
 		this.id = id;
 		this.name = name;

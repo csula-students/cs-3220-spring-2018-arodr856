@@ -83,6 +83,12 @@ public class EventsDAOImpl implements EventsDAO {
 	@Override
 	public void remove(int id) {
 		// TODO Auto-generated method stub
-
+		List<Event> events = getAll();
+		for (int i = 0; i < events.size(); i++) {
+			if (id == events.get(i).getId()) {
+				events.remove(i);
+				break;
+			}
+		}
 	}
 }
