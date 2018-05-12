@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -50,12 +51,19 @@
 			<!-- </div>-->
 		</div>
 		<div class="generator-row">
-			<game-generator data-name="tree" data-id="0" class="first-generator"></game-generator>
+			<!-- <game-generator data-name="tree" data-id="0" class="first-generator"></game-generator>
 
 			<game-generator data-name="factory" data-id="1"
 				class="second-generator"></game-generator>
 
-			<game-generator data-name="storm" data-id="2" class="third-generator"></game-generator>
+			<game-generator data-name="storm" data-id="2" class="third-generator"></game-generator> -->
+			
+			<c:forEach var='gen' items='${gens}' varStatus='status'>
+			
+			<game-generator data-name='${gen.getName()}' data-id='${status.index}' class='generator'></game-generator>
+			
+			</c:forEach>
+			
 		</div>
 	</div>
 	<!-- end of main-vertical-container-->

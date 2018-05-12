@@ -91,6 +91,9 @@ h1 {
     margin: auto ;
 }
 
+.generator {
+    margin: auto ;
+}
 .count-container{
     display: flex;
     justify-content: space-between;

@@ -36,6 +36,7 @@ public class GameServlet extends HttpServlet {
 
 		String json = gson.toJson(gameState);
 		request.setAttribute("state", json);
+		request.setAttribute("gens", genDAO.getAll());
 		request.getRequestDispatcher("/WEB-INF/game.jsp").forward(request, response);
 
 	}
