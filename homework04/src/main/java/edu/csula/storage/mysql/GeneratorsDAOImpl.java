@@ -47,6 +47,7 @@ public class GeneratorsDAOImpl implements GeneratorsDAO {
 				gens.add(gen);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			return new ArrayList<>();
 		}
 		return gens;
@@ -73,7 +74,7 @@ public class GeneratorsDAOImpl implements GeneratorsDAO {
 			}
 
 		} catch (SQLException e) {
-
+			e.printStackTrace();
 		}
 		return Optional.empty();
 	}
@@ -91,7 +92,7 @@ public class GeneratorsDAOImpl implements GeneratorsDAO {
 			ps.setInt(6, id);
 			ps.executeUpdate();
 		} catch (SQLException e) {
-
+			e.printStackTrace();
 		}
 	}
 
@@ -106,7 +107,7 @@ public class GeneratorsDAOImpl implements GeneratorsDAO {
 			ps.setInt(5, generator.getUnlockAt());
 			ps.executeUpdate();
 		}catch(SQLException e) {
-			
+			e.printStackTrace();
 		}
 	}
 
@@ -117,7 +118,7 @@ public class GeneratorsDAOImpl implements GeneratorsDAO {
 			ps.setInt(1, id);
 			ps.executeUpdate();
 		}catch(SQLException e) {
-			
+			e.printStackTrace();
 		}
 	}
 
