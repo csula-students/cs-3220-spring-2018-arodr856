@@ -7,11 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel='stylesheet' type='text/css' href='../app.css'>
-<title>Insert title here</title>
+<title>Generators</title>
 </head>
 <body>
 
-	<h1>Incremental Game Framework</h1>
+	<h1>Generators</h1>
 	<div class="nav-bar">
 		<nav class='nav-b'> <a href="#" class="nav-item">Game
 			Information</a> | <a href="generators" class="nav-item">Generators</a> |

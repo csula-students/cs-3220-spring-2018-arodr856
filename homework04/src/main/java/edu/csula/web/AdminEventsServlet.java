@@ -29,7 +29,7 @@ public class AdminEventsServlet extends HttpServlet {
 		EventsDAO dao = new EventsDAOImpl(new Database());
 
 		request.setAttribute("events", dao.getAll());
-		request.getRequestDispatcher("/WEB-INF/admin-events.jsp").forward(request, response);
+		request.getRequestDispatcher("../WEB-INF/admin-events.jsp").forward(request, response);
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.csula.storage.servlet.UsersDAOImplTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2018-05-07T01:49:37" hostname="Alexs-MBP-5.frontierlocal.net" time="0.046">
+<testsuite name="edu.csula.storage.servlet.UsersDAOImplTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2018-05-12T19:10:57" hostname="Alexs-MBP-5.frontierlocal.net" time="0.047">
   <properties/>
-  <testcase name="logout" classname="edu.csula.storage.servlet.UsersDAOImplTest" time="0.042"/>
+  <testcase name="logout" classname="edu.csula.storage.servlet.UsersDAOImplTest" time="0.043"/>
   <testcase name="getAuthenticatedUser" classname="edu.csula.storage.servlet.UsersDAOImplTest" time="0.002"/>
   <testcase name="authenticate" classname="edu.csula.storage.servlet.UsersDAOImplTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>

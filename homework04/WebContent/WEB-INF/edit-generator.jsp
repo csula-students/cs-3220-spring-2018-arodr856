@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="../app.css ">
-<title>Edit Generator</title>
+<title>Edit-Generator</title>
 </head>
 <body>
 

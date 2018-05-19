@@ -87,7 +87,7 @@ public class EventsDAOImpl implements EventsDAO {
 			ps.setInt(4, id);
 			ps.executeUpdate();
 		} catch (SQLException e) {
-
+			e.printStackTrace();
 		}
 
 	}
@@ -101,7 +101,7 @@ public class EventsDAOImpl implements EventsDAO {
 			ps.setInt(3, event.getTriggerAt());
 			ps.executeUpdate();
 		} catch (SQLException e) {
-
+			e.printStackTrace();
 		}
 	}
 
@@ -112,7 +112,7 @@ public class EventsDAOImpl implements EventsDAO {
 			ps.setInt(1, id);
 			ps.executeUpdate();
 		} catch (SQLException e) {
-
+			e.printStackTrace();
 		}
 	}
 

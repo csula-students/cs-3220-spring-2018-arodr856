@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="styles.css">
-<title>Insert title here</title>
+<title>Game</title>
 </head>
 <body>
 <body>
@@ -51,12 +51,7 @@
 			<!-- </div>-->
 		</div>
 		<div class="generator-row">
-			<!-- <game-generator data-name="tree" data-id="0" class="first-generator"></game-generator>
-
-			<game-generator data-name="factory" data-id="1"
-				class="second-generator"></game-generator>
-
-			<game-generator data-name="storm" data-id="2" class="third-generator"></game-generator> -->
+			
 			
 			<c:forEach var='gen' items='${gens}' varStatus='status'>
 			

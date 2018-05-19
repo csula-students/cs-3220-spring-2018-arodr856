@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.csula.storage.servlet.EventsDAOImplTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2018-05-07T01:49:37" hostname="Alexs-MBP-5.frontierlocal.net" time="0.619">
+<testsuite name="edu.csula.storage.servlet.EventsDAOImplTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2018-05-12T19:10:57" hostname="Alexs-MBP-5.frontierlocal.net" time="0.655">
   <properties/>
-  <testcase name="getAll" classname="edu.csula.storage.servlet.EventsDAOImplTest" time="0.613"/>
+  <testcase name="getAll" classname="edu.csula.storage.servlet.EventsDAOImplTest" time="0.647"/>
   <testcase name="remove" classname="edu.csula.storage.servlet.EventsDAOImplTest" time="0.001"/>
-  <testcase name="getById" classname="edu.csula.storage.servlet.EventsDAOImplTest" time="0.001"/>
-  <testcase name="add" classname="edu.csula.storage.servlet.EventsDAOImplTest" time="0.001"/>
+  <testcase name="getById" classname="edu.csula.storage.servlet.EventsDAOImplTest" time="0.0"/>
+  <testcase name="add" classname="edu.csula.storage.servlet.EventsDAOImplTest" time="0.0"/>
   <testcase name="set" classname="edu.csula.storage.servlet.EventsDAOImplTest" time="0.001"/>
   <testcase name="getAllWhenNull" classname="edu.csula.storage.servlet.EventsDAOImplTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
