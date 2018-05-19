@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<<<<<<< HEAD
 <link rel='stylesheet' type='text/css' href='../app.css'>
 <title>Insert title here</title>
 </head>
@@ -21,6 +22,21 @@
 	<div class="container">
 		<div class="left-side">
 			<form class="event-form" action="../admin/events" method="post">
+=======
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="../app.css ">
+</head>
+<body>
+	<h1>Incremental Game Framework</h1>
+	<div class="nav-bar">
+		<nav> <a href="#" class="nav-item">Game Information</a> | <a
+			href="#" class="nav-item">Generators</a> | <a href="#"
+			class="nav-item">Events</a> </nav>
+	</div>
+	<div class="container">
+		<div class="left-side">
+			<form class="event-form" action="events" method="post">
+>>>>>>> lab5
 				<label for="eventName">Event Name:</label> <input type="text"
 					name="name" id="eventName" class="form-input"> <label
 					for="eventDescription">Event Description</label>
@@ -39,6 +55,7 @@
 					<th>Action</th>
 				</tr>
 
+<<<<<<< HEAD
 				<c:forEach items='${events}' var='event'>
 					<tr>
 					<td>${event.getName()}</td>
@@ -54,5 +71,19 @@
 		</div>
 	</div>
 
+=======
+				<c:forEach items="${events}" var="item">
+					<tr>
+						<td>${item.getName()}</td>
+						<td>${item.getDescription()}</td>
+						<td>${item.getTriggerAt()}</td>
+						<td><a href="../admin/EditServlet?id=${item.getId()}">Edit</a>
+							<a href="../admin/DeleteServlet?id=${item.getId()}">delete</a></td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
+	</div>
+>>>>>>> lab5
 </body>
 </html>
